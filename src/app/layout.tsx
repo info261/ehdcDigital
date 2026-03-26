@@ -191,6 +191,16 @@ export default function RootLayout({
           data-persist
           strategy="afterInteractive"
         />
+        <Script
+          src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          id="usercentrics-cmp"
+          src="https://web.cmp.usercentrics.eu/ui/loader.js"
+          data-settings-id="5JJ_YAJAToTIr8"
+          strategy="beforeInteractive"
+        />
       </head>
       <body className="font-body antialiased">
         <a
