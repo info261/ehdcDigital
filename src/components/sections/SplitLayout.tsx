@@ -235,13 +235,32 @@ const testimonialVariants = {
 
 function TestimonialSlider() {
   const [current, setCurrent] = useState(0)
+  const [progress, setProgress] = useState(0)
+  const intervalDuration = 5000
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    setProgress(0)
+    const startTime = Date.now()
+
+    const progressInterval = setInterval(() => {
+      const elapsed = Date.now() - startTime
+      const newProgress = Math.min((elapsed / intervalDuration) * 100, 100)
+      setProgress(newProgress)
+    }, 50)
+
+    const slideInterval = setTimeout(() => {
       setCurrent((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
+    }, intervalDuration)
+
+    return () => {
+      clearInterval(progressInterval)
+      clearTimeout(slideInterval)
+    }
+  }, [current])
+
+  const handleDotClick = (index: number) => {
+    setCurrent(index)
+  }
 
   return (
     <div className="relative" role="region" aria-label="Client testimonials carousel">
@@ -276,19 +295,26 @@ function TestimonialSlider() {
         </AnimatePresence>
       </div>
 
-      {/* Progress dots - using CSS transitions for interruptibility */}
+      {/* Progress dots with fill animation */}
       <div className="flex gap-1.5 mt-6" role="tablist" aria-label="Testimonial navigation">
         {testimonials.map((testimonial, i) => (
           <button
             key={i}
-            onClick={() => setCurrent(i)}
+            onClick={() => handleDotClick(i)}
             role="tab"
             aria-selected={i === current}
             aria-label={`View testimonial from ${testimonial.author}`}
-            className={`h-1 rounded-full transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-1 ${
-              i === current ? 'w-6 bg-foreground' : 'w-1.5 bg-foreground/20 hover:bg-foreground/40'
+            className={`relative h-1 rounded-full overflow-hidden transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-1 ${
+              i === current ? 'w-6 bg-foreground/20' : 'w-1.5 bg-foreground/20 hover:bg-foreground/40'
             }`}
-          />
+          >
+            {i === current && (
+              <span
+                className="absolute inset-y-0 left-0 bg-foreground rounded-full"
+                style={{ width: `${progress}%` }}
+              />
+            )}
+          </button>
         ))}
       </div>
     </div>
