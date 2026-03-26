@@ -1,0 +1,31 @@
+# ehdcDigital
+
+> High-converting websites for startups, agencies, and founders.
+
+ehdcDigital is a web design and development studio run by Erik Hudec, a Webflow Certified Partner. We specialize in creating websites that convert visitors into customers.
+
+## Services
+
+- **Web Design**: Strategic UI/UX that converts visitors into paying customers.
+- **Webflow Development**: Fast, scalable sites you can edit yourself—no code needed.
+- **Branding**: Memorable identity that builds trust and stands out.
+- **Automations**: Smart workflows that save hours and eliminate busywork.
+
+## Contact
+
+- Email: info@ehdcdigital.com
+- Book a call: https://cal.com/ehdcdigital/client-call
+
+## About Erik Hudec
+
+Erik Hudec is the founder of ehdcDigital and a Webflow Certified Partner. He designs and builds high-converting websites for startups, agencies, and founders worldwide.
+
+## Testimonials
+
+- "We've done multiple projects together and Erik always nails it. Great communication, fast turnaround, and the quality is consistently solid." — David Stolarik, Webyst
+- "We've been working with Erik for 4 months now, and he is truly a professional. The phrase 'it can't be done' doesn't exist for him." — Filip Langštein, Birdline
+- "Creativity, and high-level consulting. A young, extremely talented guy built our website exceptionally well and really quickly." — Daniel Celiga, detaility
+
+## Trusted By
+
+Webyst, Birdline, Readmio, Autovea, JustADS, detaility
