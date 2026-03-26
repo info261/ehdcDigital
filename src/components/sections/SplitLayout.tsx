@@ -68,7 +68,7 @@ function CopyEmailButton() {
     <button
       onClick={handleCopy}
       aria-label={copied ? 'Email copied to clipboard' : `Copy email address ${email}`}
-      className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-full hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
+      className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
     >
       {copied ? (
         <Check size={14} weight="bold" className="text-green-500" aria-hidden="true" />
@@ -425,14 +425,14 @@ export default function SplitLayout() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Book a call with Erik Hudec (opens in new tab)"
-                  className="group relative inline-flex items-center h-9 px-4 text-xs font-medium bg-[#0f172a] text-white shadow-button rounded-full hover:bg-[#1e293b] hover:shadow-button-hover focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background transition-all duration-200"
+                  className="group relative inline-flex items-center h-9 px-4 text-xs font-medium bg-[#0f172a] text-white shadow-button rounded-[13px] hover:bg-[#1e293b] hover:shadow-button-hover focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background transition-all duration-200"
                 >
                   {/* Image - hidden by default, appears on hover */}
                   <div className="relative z-10 w-0 opacity-0 group-hover:w-7 group-hover:opacity-100 group-hover:mr-2 transition-all duration-300 ease-out overflow-hidden" aria-hidden="true">
                     <img
                       src="https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg"
                       alt=""
-                      className="w-7 h-7 rounded-full object-cover"
+                      className="w-7 h-7 rounded-[10px] object-cover"
                     />
                   </div>
                   <span className="relative z-10">Book a call</span>
