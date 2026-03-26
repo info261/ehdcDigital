@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import LenisProvider from '@/components/LenisProvider'
 
@@ -183,6 +184,12 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <Script
+          src="https://cdn.visitors.now/v.js"
+          data-token="15eaaebd-2657-467f-9019-568141485a8d"
+          data-persist
+          strategy="afterInteractive"
         />
       </head>
       <body className="font-body antialiased">
