@@ -114,7 +114,7 @@ function CopyEmailButton() {
           </svg>
         </div>
       </div>
-      <span>{copied ? 'Copied!' : email}</span>
+      <span>{email}</span>
     </button>
   )
 }
