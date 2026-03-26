@@ -70,11 +70,27 @@ function CopyEmailButton() {
       aria-label={copied ? 'Email copied to clipboard' : `Copy email address ${email}`}
       className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
     >
-      {copied ? (
-        <Check size={14} weight="bold" className="text-green-500" aria-hidden="true" />
-      ) : (
-        <Copy size={14} weight="duotone" aria-hidden="true" />
-      )}
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.div
+          key={copied ? 'check' : 'copy'}
+          initial={{ opacity: 0, scale: 0.25, filter: 'blur(4px)' }}
+          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, scale: 0.25, filter: 'blur(4px)' }}
+          transition={{
+            type: 'spring',
+            duration: 0.3,
+            bounce: 0,
+          }}
+          className="flex items-center justify-center"
+          aria-hidden="true"
+        >
+          {copied ? (
+            <Check size={14} weight="bold" className="text-green-500" />
+          ) : (
+            <Copy size={14} weight="duotone" />
+          )}
+        </motion.div>
+      </AnimatePresence>
       <span>{copied ? 'Copied!' : email}</span>
     </button>
   )
@@ -326,7 +342,7 @@ export default function SplitLayout() {
       <div className="flex flex-col lg:flex-row min-h-screen relative z-10">
         {/* Left Side - Sticky Hero (20%) */}
         <aside
-          className="lg:w-[28%] xl:w-[24%] lg:h-screen lg:sticky lg:top-0 bg-background grain-overlay"
+          className="lg:w-[28%] xl:w-[24%] lg:h-screen lg:sticky lg:top-0 lg:overflow-y-auto bg-background grain-overlay scrollbar-hide"
           style={{ borderRight: '0.5px solid var(--border)' }}
           aria-label="About ehdcDigital"
         >
