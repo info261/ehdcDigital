@@ -68,7 +68,7 @@ function CopyEmailButton() {
     <motion.button
       onClick={handleCopy}
       aria-label={copied ? 'Email copied to clipboard' : `Copy email address ${email}`}
-      className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-foreground/5 text-foreground/70 rounded-full hover:bg-foreground/10 hover:text-foreground transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
+      className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-foreground/5 text-foreground/70 rounded-lg hover:bg-foreground/10 hover:text-foreground transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -428,7 +428,7 @@ export default function SplitLayout() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Book a call with Erik Hudec (opens in new tab)"
-                  className="group relative inline-flex items-center gap-2 h-9 pl-1 pr-4 text-xs font-medium bg-[#0f172a] text-white rounded-full focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
+                  className="group relative inline-flex items-center gap-2 h-9 pl-1 pr-4 text-xs font-medium bg-[#0f172a] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
