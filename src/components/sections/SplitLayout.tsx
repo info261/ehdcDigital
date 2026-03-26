@@ -85,9 +85,9 @@ function CopyEmailButton() {
           aria-hidden="true"
         >
           {copied ? (
-            <Check size={14} weight="bold" className="text-green-500" />
+            <Check size={14} weight="regular" className="text-green-500" />
           ) : (
-            <Copy size={14} weight="duotone" />
+            <Copy size={14} weight="regular" />
           )}
         </motion.div>
       </AnimatePresence>
