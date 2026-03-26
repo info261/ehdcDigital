@@ -65,13 +65,10 @@ function CopyEmailButton() {
   }
 
   return (
-    <motion.button
+    <button
       onClick={handleCopy}
       aria-label={copied ? 'Email copied to clipboard' : `Copy email address ${email}`}
-      className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px] hover:text-foreground hover:shadow-button-hover transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+      className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
     >
       {copied ? (
         <Check size={14} weight="bold" className="text-green-500" aria-hidden="true" />
@@ -79,7 +76,7 @@ function CopyEmailButton() {
         <Copy size={14} weight="duotone" aria-hidden="true" />
       )}
       <span>{copied ? 'Copied!' : email}</span>
-    </motion.button>
+    </button>
   )
 }
 
@@ -423,15 +420,12 @@ export default function SplitLayout() {
                 variants={staggerItem}
                 className="mt-5 flex flex-wrap gap-2"
               >
-                <motion.a
+                <a
                   href="https://cal.com/ehdcdigital/needawebsite"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Book a call with Erik Hudec (opens in new tab)"
-                  className="group relative inline-flex items-center gap-2 h-9 pl-1 pr-4 text-xs font-medium bg-[#0f172a] text-white shadow-button rounded-[13px] hover:shadow-button-hover focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background transition-all duration-200"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  className="group relative inline-flex items-center gap-2 h-9 pl-1 pr-4 text-xs font-medium bg-[#0f172a] text-white shadow-button rounded-[13px] hover:bg-[#1e293b] hover:shadow-button-hover focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background transition-all duration-200"
                 >
                   {/* Image with circular stroke fill */}
                   <div className="relative z-10 w-7 h-7" aria-hidden="true">
@@ -459,7 +453,7 @@ export default function SplitLayout() {
                   <span className="relative z-10">Book a call</span>
                   {/* Availability dot */}
                   <span className="relative z-10 w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-label="Available" role="status" />
-                </motion.a>
+                </a>
                 <CopyEmailButton />
               </motion.div>
 
