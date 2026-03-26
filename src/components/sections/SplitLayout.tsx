@@ -11,6 +11,8 @@ import {
   GitBranch,
   Copy,
   Check,
+  XLogo,
+  LinkedinLogo,
 } from '@phosphor-icons/react'
 
 const rotatingWords = ['Startups', 'Agencies', 'Founders']
@@ -334,22 +336,46 @@ export default function SplitLayout() {
 
           {/* Content */}
           <div className="h-full flex flex-col px-6 lg:px-8 py-24 lg:py-8">
-            {/* Logo */}
-            <motion.button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            {/* Logo and Socials */}
+            <motion.div
               initial={{ opacity: 0, filter: 'blur(10px)' }}
               animate={{ opacity: 1, filter: 'blur(0px)' }}
               transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-12 flex items-center gap-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background rounded-full"
-              aria-label="Scroll to top - ehdcDigital"
+              className="mb-12 flex items-center justify-between"
             >
-              <img
-                src="https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg"
-                alt="Erik Hudec - Founder of ehdcDigital"
-                className="w-8 h-8 rounded-full object-cover"
-              />
-              <span className="text-sm font-semibold text-foreground">ehdcDigital</span>
-            </motion.button>
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="flex items-center gap-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background rounded-full"
+                aria-label="Scroll to top - ehdcDigital"
+              >
+                <img
+                  src="https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg"
+                  alt="Erik Hudec - Founder of ehdcDigital"
+                  className="w-8 h-8 rounded-full object-cover"
+                />
+                <span className="text-sm font-semibold text-foreground">ehdcDigital</span>
+              </button>
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://x.com/HudecErik"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Follow on X (Twitter)"
+                  className="text-foreground/40 hover:text-foreground transition-colors duration-200"
+                >
+                  <XLogo size={18} weight="fill" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/erik-hudec-091b0612b/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Connect on LinkedIn"
+                  className="text-foreground/40 hover:text-foreground transition-colors duration-200"
+                >
+                  <LinkedinLogo size={18} weight="fill" />
+                </a>
+              </div>
+            </motion.div>
 
             {/* Main headline */}
             <motion.div
