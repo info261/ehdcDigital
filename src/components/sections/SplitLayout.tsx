@@ -310,7 +310,7 @@ function TestimonialSlider() {
           >
             {i === current && (
               <span
-                className="absolute inset-y-0 left-0 bg-foreground rounded-full"
+                className="absolute top-0 left-0 h-full bg-foreground rounded-full transition-[width] duration-100 ease-linear"
                 style={{ width: `${progress}%` }}
               />
             )}
