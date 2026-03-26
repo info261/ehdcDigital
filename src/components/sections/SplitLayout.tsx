@@ -355,24 +355,24 @@ export default function SplitLayout() {
                 />
                 <span className="text-sm font-semibold text-foreground">ehdcDigital</span>
               </button>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1">
                 <a
                   href="https://x.com/HudecErik"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Follow on X (Twitter)"
-                  className="text-foreground/40 hover:text-foreground transition-colors duration-200"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/50 shadow-subtle text-foreground/50 hover:text-foreground hover:bg-white hover:shadow-card transition-all duration-200"
                 >
-                  <XLogo size={18} weight="duotone" />
+                  <XLogo size={16} weight="bold" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/erik-hudec-091b0612b/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Connect on LinkedIn"
-                  className="text-foreground/40 hover:text-foreground transition-colors duration-200"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/50 shadow-subtle text-foreground/50 hover:text-foreground hover:bg-white hover:shadow-card transition-all duration-200"
                 >
-                  <LinkedinLogo size={18} weight="duotone" />
+                  <LinkedinLogo size={16} weight="bold" />
                 </a>
               </div>
             </motion.div>
