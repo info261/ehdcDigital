@@ -11,6 +11,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ehdcdigital.com'),
+  icons: {
+    icon: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg',
+    apple: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg',
+  },
   title: {
     default: 'ehdcDigital | High-Converting Websites for Startups & Agencies',
     template: '%s | ehdcDigital',
