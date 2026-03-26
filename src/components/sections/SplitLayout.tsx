@@ -363,7 +363,7 @@ export default function SplitLayout() {
                   aria-label="Follow on X (Twitter)"
                   className="text-foreground/40 hover:text-foreground transition-colors duration-200"
                 >
-                  <XLogo size={18} weight="fill" />
+                  <XLogo size={18} weight="duotone" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/erik-hudec-091b0612b/"
@@ -372,7 +372,7 @@ export default function SplitLayout() {
                   aria-label="Connect on LinkedIn"
                   className="text-foreground/40 hover:text-foreground transition-colors duration-200"
                 >
-                  <LinkedinLogo size={18} weight="fill" />
+                  <LinkedinLogo size={18} weight="duotone" />
                 </a>
               </div>
             </motion.div>
