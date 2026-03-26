@@ -10,7 +10,6 @@ import {
   Sparkle,
   GitBranch,
   XLogo,
-  LinkedinLogo,
 } from '@phosphor-icons/react'
 
 const rotatingWords = ['Startups', 'Agencies', 'Founders']
@@ -423,7 +422,9 @@ export default function SplitLayout() {
                     aria-label="Connect on LinkedIn"
                     className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/50 shadow-subtle text-foreground/50 hover:text-foreground hover:bg-white hover:shadow-card transition-all duration-200"
                   >
-                    <LinkedinLogo size={16} weight="bold" />
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6.94 5C6.94 5.53043 6.72893 6.03914 6.35386 6.41421C5.97879 6.78929 5.47008 7 4.94 7C4.40957 7 3.90086 6.78929 3.52579 6.41421C3.15071 6.03914 2.94 5.53043 2.94 5C2.94 4.46957 3.15071 3.96086 3.52579 3.58579C3.90086 3.21071 4.40957 3 4.94 3C5.47008 3 5.97879 3.21071 6.35386 3.58579C6.72893 3.96086 6.94 4.46957 6.94 5ZM7 8.48H3V21H7V8.48ZM13.32 8.48H9.34V21H13.28V14.43C13.28 10.77 18.05 10.43 18.05 14.43V21H22V13.07C22 6.9 14.94 7.13 13.28 10.16L13.32 8.48Z"/>
+                    </svg>
                   </a>
                 </div>
               </div>
