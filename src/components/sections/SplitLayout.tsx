@@ -369,7 +369,7 @@ export default function SplitLayout() {
                 className="mt-5 flex flex-wrap gap-2"
               >
                 <motion.a
-                  href="https://cal.com/ehdcdigital/client-call"
+                  href="https://cal.com/ehdcdigital/needawebsite"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Book a call with Erik Hudec (opens in new tab)"
