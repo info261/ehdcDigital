@@ -429,28 +429,11 @@ export default function SplitLayout() {
                 >
                   {/* Image - hidden by default, appears on hover */}
                   <div className="relative z-10 w-0 opacity-0 group-hover:w-7 group-hover:opacity-100 group-hover:mr-2 transition-all duration-300 ease-out overflow-hidden" aria-hidden="true">
-                    <div className="w-7 h-7">
-                      <svg
-                        className="absolute -inset-[2px] w-[calc(100%+4px)] h-[calc(100%+4px)] -rotate-90 pointer-events-none"
-                        viewBox="0 0 36 36"
-                        aria-hidden="true"
-                      >
-                        <circle
-                          cx="18"
-                          cy="18"
-                          r="16"
-                          fill="none"
-                          stroke="#22c55e"
-                          strokeWidth="2"
-                          className="stroke-draw-circle"
-                        />
-                      </svg>
-                      <img
-                        src="https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg"
-                        alt=""
-                        className="w-7 h-7 rounded-full object-cover"
-                      />
-                    </div>
+                    <img
+                      src="https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg"
+                      alt=""
+                      className="w-7 h-7 rounded-full object-cover"
+                    />
                   </div>
                   <span className="relative z-10">Book a call</span>
                   {/* Availability dot */}
