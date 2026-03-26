@@ -477,10 +477,10 @@ export default function SplitLayout() {
                     >
                       <div className="flex items-start gap-3">
                         <div
-                          className="w-8 h-8 rounded-lg bg-foreground/5 flex items-center justify-center text-foreground/60 group-hover:bg-foreground/10 group-hover:text-foreground transition-all duration-300 flex-shrink-0 mt-0.5"
+                          className="w-8 h-8 rounded-lg bg-white/50 shadow-subtle flex items-center justify-center text-foreground/50 group-hover:bg-white group-hover:shadow-card group-hover:text-foreground transition-all duration-200 flex-shrink-0 mt-0.5"
                           aria-hidden="true"
                         >
-                          <service.icon size={18} weight="duotone" />
+                          <service.icon size={16} weight="bold" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="text-sm font-semibold text-foreground group-hover:text-foreground/80 transition-colors duration-300">
