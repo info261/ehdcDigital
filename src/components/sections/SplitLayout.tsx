@@ -345,10 +345,11 @@ export default function SplitLayout() {
           className="lg:w-[28%] xl:w-[24%] lg:h-screen lg:sticky lg:top-0 lg:overflow-y-auto bg-background grain-overlay scrollbar-hide"
           style={{ borderRight: '0.5px solid var(--border)' }}
           aria-label="About ehdcDigital"
+          data-lenis-prevent
         >
 
           {/* Content */}
-          <div className="min-h-full flex flex-col px-6 lg:px-8 py-24 lg:py-8">
+          <div className="flex flex-col px-6 lg:px-8 py-8">
             {/* Logo and Socials */}
             <motion.div
               initial={{ opacity: 0, filter: 'blur(10px)' }}
@@ -398,7 +399,7 @@ export default function SplitLayout() {
               initial="initial"
               animate="animate"
               variants={staggerContainer}
-              className="flex-1 flex flex-col justify-center"
+              className="flex flex-col"
             >
               <motion.div
                 variants={staggerItem}
@@ -512,7 +513,7 @@ export default function SplitLayout() {
               initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.7, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mt-auto pt-8"
+              className="mt-10 pt-8"
               aria-label="Trusted clients"
             >
               <h2 className="text-xs font-medium tracking-[0.15em] text-muted uppercase mb-4">
