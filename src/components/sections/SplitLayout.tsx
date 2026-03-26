@@ -348,7 +348,7 @@ export default function SplitLayout() {
         >
 
           {/* Content */}
-          <div className="h-full flex flex-col px-6 lg:px-8 py-24 lg:py-8">
+          <div className="min-h-full flex flex-col px-6 lg:px-8 py-24 lg:py-8">
             {/* Logo and Socials */}
             <motion.div
               initial={{ opacity: 0, filter: 'blur(10px)' }}
