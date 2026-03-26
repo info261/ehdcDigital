@@ -63,12 +63,23 @@ function CopyEmailButton() {
   }
 
   return (
-    <button
-      onClick={handleCopy}
-      aria-label={copied ? 'Email copied to clipboard' : `Copy email address ${email}`}
-      className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
-    >
-      <div className="relative w-[14px] h-[14px]" aria-hidden="true">
+    <div className="relative">
+      {/* Tooltip */}
+      <div
+        className={`absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] font-medium text-white bg-foreground rounded-md whitespace-nowrap transition-all duration-300 ease-out pointer-events-none ${
+          copied
+            ? 'opacity-100 scale-100 blur-0 translate-y-0'
+            : 'opacity-0 scale-[0.85] blur-[4px] translate-y-1'
+        }`}
+      >
+        Copied to clipboard
+      </div>
+      <button
+        onClick={handleCopy}
+        aria-label={copied ? 'Email copied to clipboard' : `Copy email address ${email}`}
+        className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
+      >
+        <div className="relative w-[14px] h-[14px]" aria-hidden="true">
         {/* Check icon - appears when copied */}
         <div
           className={`absolute inset-0 flex items-center justify-center transition-[opacity,filter,transform] duration-300 ease-in-out will-change-[opacity,filter,transform] ${
@@ -114,8 +125,9 @@ function CopyEmailButton() {
           </svg>
         </div>
       </div>
-      <span>{email}</span>
-    </button>
+        <span>{email}</span>
+      </button>
+    </div>
   )
 }
 
