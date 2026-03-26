@@ -432,7 +432,7 @@ export default function SplitLayout() {
                     <img
                       src="https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg"
                       alt=""
-                      className="w-7 h-7 rounded-[10px] object-cover"
+                      className="w-7 h-7 rounded-[4px] object-cover"
                     />
                   </div>
                   <span className="relative z-10">Book a call</span>
