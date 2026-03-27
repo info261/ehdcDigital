@@ -76,7 +76,7 @@ function CopyEmailButton() {
       <button
         onClick={handleCopy}
         aria-label={copied ? 'Email copied to clipboard' : `Copy email address ${email}`}
-        className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background"
+        className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         <div className="relative w-[14px] h-[14px]" aria-hidden="true">
         {/* Check icon - appears when copied */}
