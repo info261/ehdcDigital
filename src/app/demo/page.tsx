@@ -30,7 +30,7 @@ function CopyEmailButton() {
       </div>
       <button
         onClick={handleCopy}
-        className="inline-flex items-center gap-3 h-12 px-5 text-sm font-medium bg-white text-foreground/70 shadow-button rounded-[16px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200 focus:outline-none"
+        className="inline-flex items-center gap-3 h-12 px-5 text-sm font-medium bg-white text-foreground/70 shadow-button rounded-[16px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200 outline-none focus:outline-none active:outline-none [&:focus]:outline-none [-webkit-tap-highlight-color:transparent]"
       >
         <div className="relative w-5 h-5" aria-hidden="true">
           {/* Check icon - appears when copied */}
