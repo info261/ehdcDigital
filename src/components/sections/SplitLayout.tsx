@@ -14,7 +14,7 @@ import {
 } from '@phosphor-icons/react'
 
 function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  // Close on escape key
+  // Close on escape key and disable scroll
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -22,10 +22,14 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape)
       document.body.style.overflow = 'hidden'
+      // Stop Lenis smooth scroll
+      window.lenis?.stop()
     }
     return () => {
       document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = ''
+      // Resume Lenis smooth scroll
+      window.lenis?.start()
     }
   }, [isOpen, onClose])
 
