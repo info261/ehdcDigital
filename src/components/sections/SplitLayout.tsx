@@ -11,6 +11,7 @@ import {
   GitBranch,
   XLogo,
   X,
+  Check,
 } from '@phosphor-icons/react'
 
 function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -500,6 +501,150 @@ function TestimonialSlider() {
   )
 }
 
+function PricingCard({
+  title,
+  description,
+  designPrice,
+  devPrice,
+  features,
+  isCustom = false,
+}: {
+  title: string
+  description: string
+  designPrice: number
+  devPrice: number
+  features: string[]
+  isCustom?: boolean
+}) {
+  const [includeDev, setIncludeDev] = useState(false)
+  const totalPrice = includeDev ? designPrice + devPrice : designPrice
+
+  return (
+    <div className="bg-[#ffffff] rounded-2xl shadow-card p-6 flex flex-col">
+      <h3 className="text-lg font-semibold text-foreground mb-1">{title}</h3>
+      <p className="text-sm text-muted mb-4">{description}</p>
+
+      {isCustom ? (
+        <div className="mb-4">
+          <span className="text-2xl font-semibold text-foreground">Custom quote</span>
+        </div>
+      ) : (
+        <>
+          <div className="mb-4">
+            <span className="text-2xl font-semibold text-foreground">€{totalPrice.toLocaleString()}</span>
+            <span className="text-sm text-muted ml-1">+</span>
+          </div>
+
+          {/* Toggle for Webflow Development */}
+          <button
+            onClick={() => setIncludeDev(!includeDev)}
+            className={`flex items-center justify-between w-full p-3 rounded-xl mb-4 transition-all duration-200 ${
+              includeDev
+                ? 'bg-foreground text-white'
+                : 'bg-white shadow-subtle text-foreground/70 hover:bg-[#f8f8f8]'
+            }`}
+          >
+            <span className="text-xs font-medium">+ Webflow Development</span>
+            <span className="text-xs font-medium">+€{devPrice.toLocaleString()}</span>
+          </button>
+        </>
+      )}
+
+      <ul className="space-y-2 mb-6 flex-1">
+        {features.map((feature, i) => (
+          <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+            <Check size={16} weight="bold" className="text-foreground mt-0.5 flex-shrink-0" />
+            {feature}
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href="https://cal.com/ehdcdigital/needawebsite"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center justify-center gap-2 h-10 px-4 text-sm font-medium bg-foreground text-white rounded-[13px] shadow-button hover:bg-foreground/90 hover:shadow-button-hover transition-all duration-200"
+      >
+        Get started
+      </a>
+    </div>
+  )
+}
+
+function PricingSection() {
+  return (
+    <section className="py-16 px-6 lg:px-8" aria-label="Pricing">
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="text-center mb-10"
+        >
+          <h2 className="text-2xl lg:text-3xl font-heading font-semibold text-foreground mb-3">
+            Simple, transparent pricing
+          </h2>
+          <p className="text-muted max-w-md mx-auto">
+            Choose web design only, or add Webflow development for a complete solution.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="grid md:grid-cols-3 gap-4"
+        >
+          <PricingCard
+            title="Landing Page"
+            description="Perfect for launches, campaigns, and single products."
+            designPrice={1500}
+            devPrice={1000}
+            features={[
+              'Single page design',
+              'Mobile responsive',
+              'SEO optimized',
+              '2 revision rounds',
+              'Source files included',
+            ]}
+          />
+          <PricingCard
+            title="Website"
+            description="For businesses ready to establish their online presence."
+            designPrice={3500}
+            devPrice={2500}
+            features={[
+              'Up to 7 pages',
+              'Mobile responsive',
+              'CMS integration',
+              'Custom animations',
+              'SEO & performance optimized',
+              '3 revision rounds',
+            ]}
+          />
+          <PricingCard
+            title="Website + Brand"
+            description="Complete package for new businesses starting fresh."
+            designPrice={0}
+            devPrice={0}
+            features={[
+              'Full brand identity',
+              'Logo & guidelines',
+              'Complete website design',
+              'Webflow development',
+              'CMS & automations',
+              'Ongoing support options',
+            ]}
+            isCustom
+          />
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 export default function SplitLayout() {
   const [aboutModalOpen, setAboutModalOpen] = useState(false)
 
@@ -680,43 +825,6 @@ export default function SplitLayout() {
                 </ul>
               </motion.nav>
 
-              {/* Pricing */}
-              <motion.section
-                variants={fadeInBlur}
-                className="mt-10 pt-8 border-t border-border/50"
-                aria-label="Pricing"
-              >
-                <h2 className="text-xs font-medium tracking-[0.15em] text-muted uppercase mb-4">
-                  Pricing
-                </h2>
-                <div className="space-y-3">
-                  <div className="p-3 rounded-xl bg-white/50 shadow-subtle">
-                    <div className="flex items-baseline justify-between mb-1">
-                      <h3 className="text-sm font-semibold text-foreground">Landing Page</h3>
-                      <span className="text-sm font-semibold text-foreground">€1,500+</span>
-                    </div>
-                    <p className="text-xs text-muted">Single page, responsive, SEO-ready. Perfect for launches and campaigns.</p>
-                  </div>
-                  <div className="p-3 rounded-xl bg-white/50 shadow-subtle">
-                    <div className="flex items-baseline justify-between mb-1">
-                      <h3 className="text-sm font-semibold text-foreground">Website</h3>
-                      <span className="text-sm font-semibold text-foreground">€3,500+</span>
-                    </div>
-                    <p className="text-xs text-muted">Multi-page with CMS, animations, SEO optimization, and automations.</p>
-                  </div>
-                  <div className="p-3 rounded-xl bg-white/50 shadow-subtle">
-                    <div className="flex items-baseline justify-between mb-1">
-                      <h3 className="text-sm font-semibold text-foreground">Website + Brand</h3>
-                      <span className="text-sm font-semibold text-foreground">€6,000+</span>
-                    </div>
-                    <p className="text-xs text-muted">Full website plus brand identity, logo, and guidelines.</p>
-                  </div>
-                </div>
-                <p className="mt-3 text-xs text-muted">
-                  Need something custom? <a href="https://cal.com/ehdcdigital/needawebsite" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:text-foreground/70 transition-colors">Let's talk</a>
-                </p>
-              </motion.section>
-
               {/* Testimonial Slider */}
               <motion.section
                 variants={fadeInBlur}
@@ -821,6 +929,8 @@ export default function SplitLayout() {
               ))}
             </motion.ul>
 
+            {/* Pricing Section */}
+            <PricingSection />
           </div>
         </section>
       </div>
