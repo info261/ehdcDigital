@@ -11,7 +11,6 @@ import {
   GitBranch,
   XLogo,
   X,
-  Check,
 } from '@phosphor-icons/react'
 
 function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -501,190 +500,6 @@ function TestimonialSlider() {
   )
 }
 
-function PricingCard({
-  title,
-  timeline,
-  designPrice,
-  fullPrice,
-  features,
-  gradient,
-  icon,
-  isCustom = false,
-  includeDev,
-}: {
-  title: string
-  timeline: string
-  designPrice: number
-  fullPrice: number
-  features: string[]
-  gradient: string
-  icon: React.ReactNode
-  isCustom?: boolean
-  includeDev: boolean
-}) {
-  const price = includeDev ? fullPrice : designPrice
-
-  return (
-    <div className="bg-[#ffffff] rounded-2xl shadow-card overflow-hidden flex flex-col h-full">
-      {/* Header with gradient */}
-      <div className={`relative h-32 ${gradient} p-5 flex flex-col justify-between`}>
-        <div className="flex items-start justify-between">
-          <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white">
-            {icon}
-          </div>
-          <span className="text-xs text-white/80 bg-white/20 backdrop-blur-sm px-2.5 py-1 rounded-full">
-            {timeline}
-          </span>
-        </div>
-        <h3 className="text-xl font-semibold text-white">{title}</h3>
-      </div>
-
-      <div className="p-5 flex flex-col flex-1">
-        {isCustom ? (
-          <div className="mb-5">
-            <span className="text-3xl font-semibold text-foreground">Let's talk</span>
-            <p className="text-sm text-muted mt-1">Tailored to your needs</p>
-          </div>
-        ) : (
-          <div className="mb-5">
-            <span className="text-3xl font-semibold text-foreground">€{price.toLocaleString()}</span>
-            <p className="text-sm text-muted mt-1">
-              {includeDev ? 'Design + Development' : 'Design only'}
-            </p>
-          </div>
-        )}
-
-        <ul className="space-y-2.5 mb-6 flex-1">
-          {features.map((feature, i) => (
-            <li key={i} className="flex items-start gap-2.5 text-sm text-foreground/70">
-              <Check size={16} weight="bold" className="text-foreground mt-0.5 flex-shrink-0" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-
-        <a
-          href="https://cal.com/ehdcdigital/needawebsite"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 h-11 px-4 text-sm font-medium bg-foreground text-white rounded-[13px] shadow-button hover:bg-foreground/90 hover:shadow-button-hover transition-all duration-200 w-full"
-        >
-          {isCustom ? 'Get in touch' : 'Get started'}
-        </a>
-      </div>
-    </div>
-  )
-}
-
-function PricingSection() {
-  const [includeDev, setIncludeDev] = useState(true)
-
-  return (
-    <section className="py-20" aria-label="Pricing">
-      <motion.div
-        initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
-        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-        viewport={{ once: true, margin: '-50px' }}
-        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="text-center mb-10"
-      >
-        <h2 className="text-2xl lg:text-3xl font-heading font-semibold text-foreground mb-3">
-          Simple, transparent pricing
-        </h2>
-        <p className="text-muted max-w-lg mx-auto mb-6">
-          Choose what fits your project. Design only, or the full package with Webflow development.
-        </p>
-
-        {/* Toggle */}
-        <div className="inline-flex items-center p-1 bg-white rounded-full shadow-card">
-          <button
-            onClick={() => setIncludeDev(false)}
-            className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
-              !includeDev
-                ? 'bg-foreground text-white shadow-button'
-                : 'text-foreground/60 hover:text-foreground'
-            }`}
-          >
-            Design only
-          </button>
-          <button
-            onClick={() => setIncludeDev(true)}
-            className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
-              includeDev
-                ? 'bg-foreground text-white shadow-button'
-                : 'text-foreground/60 hover:text-foreground'
-            }`}
-          >
-            Design + Webflow
-          </button>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
-        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-        viewport={{ once: true, margin: '-50px' }}
-        transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="grid md:grid-cols-3 gap-5"
-      >
-        <PricingCard
-          title="Landing Page"
-          timeline="1-2 weeks"
-          designPrice={1500}
-          fullPrice={2500}
-          gradient="bg-gradient-to-br from-blue-500 to-blue-600"
-          icon={<Sparkle size={20} weight="fill" />}
-          features={[
-            'Single page design',
-            'Desktop, tablet & mobile',
-            'Figma source files',
-            'SEO optimized structure',
-            '2 revision rounds',
-            ...(includeDev ? ['Webflow development', 'Basic animations'] : []),
-          ]}
-          includeDev={includeDev}
-        />
-        <PricingCard
-          title="Website"
-          timeline="3-4 weeks"
-          designPrice={3500}
-          fullPrice={6000}
-          gradient="bg-gradient-to-br from-violet-500 to-purple-600"
-          icon={<Code size={20} weight="fill" />}
-          features={[
-            'Up to 7 unique pages',
-            'Desktop, tablet & mobile',
-            'Figma source files',
-            'Style guide included',
-            '3 revision rounds',
-            ...(includeDev ? ['Webflow development', 'CMS integration', 'Custom animations'] : []),
-          ]}
-          includeDev={includeDev}
-        />
-        <PricingCard
-          title="Website + Brand"
-          timeline="5-6 weeks"
-          designPrice={0}
-          fullPrice={0}
-          gradient="bg-gradient-to-br from-orange-500 to-pink-500"
-          icon={<Palette size={20} weight="fill" />}
-          features={[
-            'Full brand identity',
-            'Logo & brand guidelines',
-            'Complete website design',
-            'Webflow development',
-            'CMS & automations setup',
-            'Unlimited revisions',
-            'Priority support',
-          ]}
-          isCustom
-          includeDev={includeDev}
-        />
-      </motion.div>
-    </section>
-  )
-}
-
 export default function SplitLayout() {
   const [aboutModalOpen, setAboutModalOpen] = useState(false)
 
@@ -969,8 +784,6 @@ export default function SplitLayout() {
               ))}
             </motion.ul>
 
-            {/* Pricing Section */}
-            <PricingSection />
           </div>
         </section>
       </div>
