@@ -383,7 +383,7 @@ export default function SplitLayout() {
         >
 
           {/* Content */}
-          <div className="flex flex-col px-6 lg:px-8 py-8">
+          <div className="flex flex-col px-6 lg:px-8 py-8 lg:h-full">
             {/* Logo and Socials */}
             <motion.div
               initial={{ opacity: 0, filter: 'blur(10px)' }}
@@ -435,7 +435,7 @@ export default function SplitLayout() {
               initial="initial"
               animate="animate"
               variants={staggerContainer}
-              className="flex flex-col"
+              className="flex flex-col lg:flex-1"
             >
               <motion.div
                 variants={staggerItem}
@@ -549,7 +549,7 @@ export default function SplitLayout() {
               initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.7, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mt-10 pt-8"
+              className="mt-10 pt-8 lg:mt-auto"
               aria-label="Trusted clients"
             >
               <h2 className="text-xs font-medium tracking-[0.15em] text-muted uppercase mb-4">
