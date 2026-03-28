@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { projects } from '@/data/content'
 import { Logo } from '@/components/Logo'
 import {
@@ -10,7 +10,108 @@ import {
   Sparkle,
   GitBranch,
   XLogo,
+  X,
 } from '@phosphor-icons/react'
+
+function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  // Close on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'hidden'
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = ''
+    }
+  }, [isOpen, onClose])
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="about-modal-title"
+        >
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 bg-foreground/20 backdrop-blur-sm"
+            onClick={onClose}
+            aria-hidden="true"
+          />
+
+          {/* Modal */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 0.95, filter: 'blur(8px)' }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="relative bg-background rounded-2xl shadow-elevated max-w-md w-full p-6 grain-overlay"
+          >
+            {/* Close button */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg bg-white/50 shadow-subtle text-foreground/50 hover:text-foreground hover:bg-white hover:shadow-card transition-all duration-200"
+              aria-label="Close modal"
+            >
+              <X size={16} weight="bold" />
+            </button>
+
+            {/* Content */}
+            <div className="flex items-start gap-4 mb-4">
+              <img
+                src="https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg"
+                alt="Erik Hudec"
+                className="w-16 h-16 rounded-full object-cover"
+              />
+              <div>
+                <h2 id="about-modal-title" className="text-lg font-semibold text-foreground">
+                  Erik Hudec
+                </h2>
+                <p className="text-sm text-muted">Web Designer & Webflow Developer</p>
+              </div>
+            </div>
+
+            <p className="text-sm text-foreground/70 leading-relaxed mb-6">
+              I'm a Webflow Certified Partner specializing in designing and building high-converting websites for startups, agencies, and founders. I focus on strategic UI/UX that turns visitors into customers.
+            </p>
+
+            <div className="flex flex-wrap gap-2">
+              <a
+                href="https://contra.com/erik_hudec_tfzihkdd"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-foreground text-white rounded-[13px] shadow-button hover:bg-foreground/90 hover:shadow-button-hover transition-all duration-200"
+              >
+                View portfolio
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+              <a
+                href="https://cal.com/ehdcdigital/needawebsite"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200"
+              >
+                Book a call
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  )
+}
 
 const rotatingWords = ['Startups', 'Agencies', 'Founders']
 
@@ -371,7 +472,11 @@ function TestimonialSlider() {
 }
 
 export default function SplitLayout() {
+  const [aboutModalOpen, setAboutModalOpen] = useState(false)
+
   return (
+    <>
+      <AboutModal isOpen={aboutModalOpen} onClose={() => setAboutModalOpen(false)} />
     <div className="relative">
       <div className="flex flex-col lg:flex-row min-h-screen relative z-10">
         {/* Left Side - Sticky Hero (20%) */}
@@ -405,20 +510,15 @@ export default function SplitLayout() {
                   <span className="text-sm font-semibold text-foreground">ehdcDigital</span>
                 </button>
                 {/* Hover card */}
-                <div className="absolute top-full left-0 pt-2 opacity-0 scale-95 blur-[4px] translate-y-[-4px] pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:blur-0 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out">
+                <div className="absolute top-full left-0 pt-2 z-50 opacity-0 scale-95 blur-[4px] translate-y-[-4px] pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:blur-0 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out">
                   <div className="bg-white rounded-xl shadow-card p-3 min-w-[180px]">
                     <p className="text-xs text-muted mb-2">Want to know more?</p>
-                    <a
-                      href="https://contra.com/erik_hudec_tfzihkdd"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 h-8 px-3 text-xs font-medium bg-foreground text-white rounded-lg hover:bg-foreground/90 transition-colors duration-200"
+                    <button
+                      onClick={() => setAboutModalOpen(true)}
+                      className="inline-flex items-center gap-2 h-8 px-3 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-lg hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200"
                     >
                       About me
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -658,5 +758,6 @@ export default function SplitLayout() {
         </section>
       </div>
     </div>
+    </>
   )
 }
