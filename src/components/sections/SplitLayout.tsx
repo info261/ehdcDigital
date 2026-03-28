@@ -77,25 +77,37 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                 <h2 id="about-modal-title" className="text-lg font-semibold text-foreground">
                   Erik Hudec
                 </h2>
-                <p className="text-sm text-muted">Web Designer & Webflow Developer</p>
+                <p className="text-sm text-muted">28 · Banská Bystrica 🇸🇰 → Prague 🇨🇿</p>
               </div>
             </div>
 
-            <p className="text-sm text-foreground/70 leading-relaxed mb-6">
-              I build fast, accessible, and search-optimized Webflow sites. Based in Prague, I help startups, agencies, and founders turn their ideas into high-converting websites that actually drive results.
-            </p>
+            <div className="text-sm text-foreground/70 leading-relaxed mb-6 space-y-3">
+              <p>
+                I've spent the last 5 years building Webflow sites and automations that save my clients hours of work and thousands of dollars. I'm obsessed with accessibility and UX—because a website should feel effortless for everyone.
+              </p>
+              <p>
+                Beyond client work, I love sharing what I've learned: freelancing tips, business ideas, my mistakes (and how to avoid them), resources, and inspiration. I post on X and LinkedIn, but the real gems go straight to my newsletter.
+              </p>
+            </div>
 
-            <a
-              href="https://cal.com/ehdcdigital/needawebsite"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-foreground text-white rounded-[13px] shadow-button hover:bg-foreground/90 hover:shadow-button-hover transition-all duration-200"
-            >
-              Book a call
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
+            <div className="flex flex-wrap gap-2">
+              <a
+                href="https://cal.com/ehdcdigital/needawebsite"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-foreground text-white rounded-[13px] shadow-button hover:bg-foreground/90 hover:shadow-button-hover transition-all duration-200"
+              >
+                Book a call
+              </a>
+              <a
+                href="https://eriks-newsletter-70c132.beehiiv.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200"
+              >
+                Become a better freelancer
+              </a>
+            </div>
           </motion.div>
         </div>
       )}
