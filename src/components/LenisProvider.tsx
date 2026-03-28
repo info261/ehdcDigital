@@ -3,12 +3,6 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
 
-declare global {
-  interface Window {
-    lenis?: Lenis
-  }
-}
-
 export default function LenisProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
@@ -18,7 +12,8 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
     })
 
     // Expose Lenis instance globally for modal scroll lock
-    window.lenis = lenis
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(window as any).__lenis = lenis
 
     function raf(time: number) {
       lenis.raf(time)
@@ -29,7 +24,8 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
 
     return () => {
       lenis.destroy()
-      window.lenis = undefined
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(window as any).__lenis = undefined
     }
   }, [])
 

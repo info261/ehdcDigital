@@ -33,8 +33,10 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
       document.addEventListener('touchmove', preventScroll, { passive: false, capture: true })
       document.addEventListener('scroll', preventScroll, { passive: false, capture: true })
       // Stop Lenis smooth scroll
-      if (window.lenis) {
-        window.lenis.stop()
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const lenis = (window as any).__lenis
+      if (lenis) {
+        lenis.stop()
       }
     }
     return () => {
@@ -43,8 +45,10 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
       document.removeEventListener('touchmove', preventScroll, { capture: true })
       document.removeEventListener('scroll', preventScroll, { capture: true })
       // Resume Lenis smooth scroll
-      if (window.lenis) {
-        window.lenis.start()
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const lenis = (window as any).__lenis
+      if (lenis) {
+        lenis.start()
       }
     }
   }, [isOpen, onClose])
