@@ -82,30 +82,20 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
             </div>
 
             <p className="text-sm text-foreground/70 leading-relaxed mb-6">
-              I'm a Webflow Certified Partner specializing in designing and building high-converting websites for startups, agencies, and founders. I focus on strategic UI/UX that turns visitors into customers.
+              I build fast, accessible, and search-optimized Webflow sites. Based in Prague, I help startups, agencies, and founders turn their ideas into high-converting websites that actually drive results.
             </p>
 
-            <div className="flex flex-wrap gap-2">
-              <a
-                href="https://contra.com/erik_hudec_tfzihkdd"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-foreground text-white rounded-[13px] shadow-button hover:bg-foreground/90 hover:shadow-button-hover transition-all duration-200"
-              >
-                View portfolio
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </a>
-              <a
-                href="https://cal.com/ehdcdigital/needawebsite"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px] hover:bg-[#f8f8f8] hover:text-foreground hover:shadow-button-hover transition-all duration-200"
-              >
-                Book a call
-              </a>
-            </div>
+            <a
+              href="https://cal.com/ehdcdigital/needawebsite"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-foreground text-white rounded-[13px] shadow-button hover:bg-foreground/90 hover:shadow-button-hover transition-all duration-200"
+            >
+              Book a call
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
           </motion.div>
         </div>
       )}
@@ -510,7 +500,7 @@ export default function SplitLayout() {
                   <span className="text-sm font-semibold text-foreground">ehdcDigital</span>
                 </button>
                 {/* Hover card */}
-                <div className="absolute top-full left-0 pt-2 z-50 opacity-0 scale-95 blur-[4px] translate-y-[-4px] pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:blur-0 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out">
+                <div className="absolute top-full left-0 pt-2 z-[60] opacity-0 scale-95 blur-[4px] translate-y-[-4px] pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:blur-0 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out">
                   <div className="bg-white rounded-xl shadow-card p-3 min-w-[180px]">
                     <p className="text-xs text-muted mb-2">Want to know more?</p>
                     <button
