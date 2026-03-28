@@ -21,13 +21,23 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     }
     if (isOpen) {
       document.addEventListener('keydown', handleEscape)
+      // Disable all scrolling
+      document.documentElement.style.overflow = 'hidden'
       document.body.style.overflow = 'hidden'
+      document.documentElement.style.position = 'fixed'
+      document.documentElement.style.width = '100%'
+      document.documentElement.style.height = '100%'
       // Stop Lenis smooth scroll
       window.lenis?.stop()
     }
     return () => {
       document.removeEventListener('keydown', handleEscape)
+      // Re-enable scrolling
+      document.documentElement.style.overflow = ''
       document.body.style.overflow = ''
+      document.documentElement.style.position = ''
+      document.documentElement.style.width = ''
+      document.documentElement.style.height = ''
       // Resume Lenis smooth scroll
       window.lenis?.start()
     }
