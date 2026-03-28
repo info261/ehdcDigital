@@ -680,6 +680,43 @@ export default function SplitLayout() {
                 </ul>
               </motion.nav>
 
+              {/* Pricing */}
+              <motion.section
+                variants={fadeInBlur}
+                className="mt-10 pt-8 border-t border-border/50"
+                aria-label="Pricing"
+              >
+                <h2 className="text-xs font-medium tracking-[0.15em] text-muted uppercase mb-4">
+                  Pricing
+                </h2>
+                <div className="space-y-3">
+                  <div className="p-3 rounded-xl bg-white/50 shadow-subtle">
+                    <div className="flex items-baseline justify-between mb-1">
+                      <h3 className="text-sm font-semibold text-foreground">Landing Page</h3>
+                      <span className="text-sm font-semibold text-foreground">€1,500+</span>
+                    </div>
+                    <p className="text-xs text-muted">Single page, responsive, SEO-ready. Perfect for launches and campaigns.</p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/50 shadow-subtle">
+                    <div className="flex items-baseline justify-between mb-1">
+                      <h3 className="text-sm font-semibold text-foreground">Website</h3>
+                      <span className="text-sm font-semibold text-foreground">€3,500+</span>
+                    </div>
+                    <p className="text-xs text-muted">Multi-page with CMS, animations, SEO optimization, and automations.</p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/50 shadow-subtle">
+                    <div className="flex items-baseline justify-between mb-1">
+                      <h3 className="text-sm font-semibold text-foreground">Website + Brand</h3>
+                      <span className="text-sm font-semibold text-foreground">€6,000+</span>
+                    </div>
+                    <p className="text-xs text-muted">Full website plus brand identity, logo, and guidelines.</p>
+                  </div>
+                </div>
+                <p className="mt-3 text-xs text-muted">
+                  Need something custom? <a href="https://cal.com/ehdcdigital/needawebsite" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:text-foreground/70 transition-colors">Let's talk</a>
+                </p>
+              </motion.section>
+
               {/* Testimonial Slider */}
               <motion.section
                 variants={fadeInBlur}
