@@ -83,7 +83,10 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 
             <div className="text-sm text-foreground/70 leading-relaxed mb-6 space-y-3">
               <p>
-                I've spent the last 5 years building Webflow sites and automations that save my clients hours of work and thousands of dollars. I'm obsessed with accessibility and UX—because a website should feel effortless for everyone.
+                I've spent the last 5 years building Webflow sites and automations that save my clients hours of work and thousands of dollars. I'm obsessed with accessibility, UX, and SEO—I spend countless hours optimizing every detail because a website should feel effortless and actually get found.
+              </p>
+              <p>
+                I'm always excited to learn new things. It helps me grow as a person and as a business owner who can deliver better results for my clients.
               </p>
               <p>
                 Beyond client work, I love sharing what I've learned: freelancing tips, business ideas, my mistakes (and how to avoid them), resources, and inspiration. I post on X and LinkedIn, but the real gems go straight to my newsletter.
