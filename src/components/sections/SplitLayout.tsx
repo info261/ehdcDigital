@@ -391,18 +391,24 @@ export default function SplitLayout() {
               transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="mb-12 flex items-center justify-between"
             >
-              <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="flex items-center gap-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background rounded-full"
-                aria-label="Scroll to top - ehdcDigital"
-              >
-                <img
-                  src="https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg"
-                  alt="Erik Hudec - Founder of ehdcDigital"
-                  className="w-8 h-8 rounded-full object-cover"
-                />
-                <span className="text-sm font-semibold text-foreground">ehdcDigital</span>
-              </button>
+              <div className="relative group">
+                {/* Tooltip */}
+                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] font-medium text-white bg-foreground rounded-md whitespace-nowrap transition-all duration-300 ease-out pointer-events-none opacity-0 scale-[0.85] blur-[4px] translate-y-[-4px] group-hover:opacity-100 group-hover:scale-100 group-hover:blur-0 group-hover:translate-y-0">
+                  Learn more about me
+                </div>
+                <button
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="flex items-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full"
+                  aria-label="Scroll to top - ehdcDigital"
+                >
+                  <img
+                    src="https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg"
+                    alt="Erik Hudec - Founder of ehdcDigital"
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                  <span className="text-sm font-semibold text-foreground">ehdcDigital</span>
+                </button>
+              </div>
               <div className="flex items-center gap-2">
                 <span className="text-xs text-muted">Follow me</span>
                 <div className="flex items-center gap-1">
