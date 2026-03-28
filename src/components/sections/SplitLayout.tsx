@@ -503,56 +503,70 @@ function TestimonialSlider() {
 
 function PricingCard({
   title,
-  description,
-  designPrice,
-  devPrice,
+  timeline,
+  basePrice,
+  addOns,
   features,
   isCustom = false,
 }: {
   title: string
-  description: string
-  designPrice: number
-  devPrice: number
+  timeline: string
+  basePrice: number
+  addOns: { name: string; price: number }[]
   features: string[]
   isCustom?: boolean
 }) {
-  const [includeDev, setIncludeDev] = useState(false)
-  const totalPrice = includeDev ? designPrice + devPrice : designPrice
+  const [selectedAddOns, setSelectedAddOns] = useState<number[]>([])
+
+  const toggleAddOn = (index: number) => {
+    setSelectedAddOns((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    )
+  }
+
+  const totalPrice = basePrice + selectedAddOns.reduce((sum, i) => sum + addOns[i].price, 0)
 
   return (
-    <div className="bg-[#ffffff] rounded-2xl shadow-card p-6 flex flex-col">
-      <h3 className="text-lg font-semibold text-foreground mb-1">{title}</h3>
-      <p className="text-sm text-muted mb-4">{description}</p>
+    <div className="bg-[#ffffff] rounded-2xl shadow-card p-6 flex flex-col h-full">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+        <span className="text-xs text-muted bg-background px-2 py-1 rounded-full">{timeline}</span>
+      </div>
 
       {isCustom ? (
-        <div className="mb-4">
-          <span className="text-2xl font-semibold text-foreground">Custom quote</span>
+        <div className="mb-5">
+          <span className="text-3xl font-semibold text-foreground">Let's talk</span>
         </div>
       ) : (
-        <>
-          <div className="mb-4">
-            <span className="text-2xl font-semibold text-foreground">€{totalPrice.toLocaleString()}</span>
-            <span className="text-sm text-muted ml-1">+</span>
-          </div>
-
-          {/* Toggle for Webflow Development */}
-          <button
-            onClick={() => setIncludeDev(!includeDev)}
-            className={`flex items-center justify-between w-full p-3 rounded-xl mb-4 transition-all duration-200 ${
-              includeDev
-                ? 'bg-foreground text-white'
-                : 'bg-white shadow-subtle text-foreground/70 hover:bg-[#f8f8f8]'
-            }`}
-          >
-            <span className="text-xs font-medium">+ Webflow Development</span>
-            <span className="text-xs font-medium">+€{devPrice.toLocaleString()}</span>
-          </button>
-        </>
+        <div className="mb-5">
+          <span className="text-3xl font-semibold text-foreground">€{totalPrice.toLocaleString()}</span>
+          <span className="text-muted ml-1">+</span>
+        </div>
       )}
 
-      <ul className="space-y-2 mb-6 flex-1">
+      {/* Add-ons */}
+      {!isCustom && addOns.length > 0 && (
+        <div className="space-y-2 mb-5">
+          {addOns.map((addOn, i) => (
+            <button
+              key={i}
+              onClick={() => toggleAddOn(i)}
+              className={`flex items-center justify-between w-full p-3 rounded-xl text-xs font-medium transition-all duration-200 ${
+                selectedAddOns.includes(i)
+                  ? 'bg-foreground text-white shadow-button'
+                  : 'bg-background text-foreground/70 hover:bg-foreground/5'
+              }`}
+            >
+              <span>{addOn.name}</span>
+              <span>+€{addOn.price.toLocaleString()}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      <ul className="space-y-2.5 mb-6 flex-1">
         {features.map((feature, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+          <li key={i} className="flex items-start gap-2.5 text-sm text-foreground/70">
             <Check size={16} weight="bold" className="text-foreground mt-0.5 flex-shrink-0" />
             {feature}
           </li>
@@ -563,9 +577,9 @@ function PricingCard({
         href="https://cal.com/ehdcdigital/needawebsite"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center gap-2 h-10 px-4 text-sm font-medium bg-foreground text-white rounded-[13px] shadow-button hover:bg-foreground/90 hover:shadow-button-hover transition-all duration-200"
+        className="inline-flex items-center justify-center gap-2 h-11 px-4 text-sm font-medium bg-foreground text-white rounded-[13px] shadow-button hover:bg-foreground/90 hover:shadow-button-hover transition-all duration-200 w-full"
       >
-        Get started
+        {isCustom ? 'Get in touch' : 'Get started'}
       </a>
     </div>
   )
@@ -573,74 +587,80 @@ function PricingCard({
 
 function PricingSection() {
   return (
-    <section className="py-16 px-6 lg:px-8" aria-label="Pricing">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-center mb-10"
-        >
-          <h2 className="text-2xl lg:text-3xl font-heading font-semibold text-foreground mb-3">
-            Simple, transparent pricing
-          </h2>
-          <p className="text-muted max-w-md mx-auto">
-            Choose web design only, or add Webflow development for a complete solution.
-          </p>
-        </motion.div>
+    <section className="py-20" aria-label="Pricing">
+      <motion.div
+        initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
+        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="text-center mb-12"
+      >
+        <h2 className="text-2xl lg:text-3xl font-heading font-semibold text-foreground mb-3">
+          Simple, transparent pricing
+        </h2>
+        <p className="text-muted max-w-lg mx-auto">
+          Design only or full development—pick what you need. Add-ons available for each package.
+        </p>
+      </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="grid md:grid-cols-3 gap-4"
-        >
-          <PricingCard
-            title="Landing Page"
-            description="Perfect for launches, campaigns, and single products."
-            designPrice={1500}
-            devPrice={1000}
-            features={[
-              'Single page design',
-              'Mobile responsive',
-              'SEO optimized',
-              '2 revision rounds',
-              'Source files included',
-            ]}
-          />
-          <PricingCard
-            title="Website"
-            description="For businesses ready to establish their online presence."
-            designPrice={3500}
-            devPrice={2500}
-            features={[
-              'Up to 7 pages',
-              'Mobile responsive',
-              'CMS integration',
-              'Custom animations',
-              'SEO & performance optimized',
-              '3 revision rounds',
-            ]}
-          />
-          <PricingCard
-            title="Website + Brand"
-            description="Complete package for new businesses starting fresh."
-            designPrice={0}
-            devPrice={0}
-            features={[
-              'Full brand identity',
-              'Logo & guidelines',
-              'Complete website design',
-              'Webflow development',
-              'CMS & automations',
-              'Ongoing support options',
-            ]}
-            isCustom
-          />
-        </motion.div>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
+        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="grid md:grid-cols-3 gap-4"
+      >
+        <PricingCard
+          title="Landing Page"
+          timeline="1-2 weeks"
+          basePrice={1500}
+          addOns={[
+            { name: 'Webflow Development', price: 1000 },
+            { name: 'Copywriting', price: 300 },
+          ]}
+          features={[
+            'Single page design',
+            'Desktop, tablet & mobile',
+            'Figma source files',
+            'SEO optimized structure',
+            '2 revision rounds',
+          ]}
+        />
+        <PricingCard
+          title="Website"
+          timeline="3-4 weeks"
+          basePrice={3500}
+          addOns={[
+            { name: 'Webflow Development', price: 2500 },
+            { name: 'CMS Setup', price: 500 },
+            { name: 'Custom Animations', price: 800 },
+          ]}
+          features={[
+            'Up to 7 unique pages',
+            'Desktop, tablet & mobile',
+            'Figma source files',
+            'SEO & performance optimized',
+            '3 revision rounds',
+            'Style guide included',
+          ]}
+        />
+        <PricingCard
+          title="Website + Brand"
+          timeline="5-6 weeks"
+          basePrice={0}
+          addOns={[]}
+          features={[
+            'Full brand identity',
+            'Logo & brand guidelines',
+            'Complete website design',
+            'Webflow development',
+            'CMS & automations setup',
+            'Unlimited revisions',
+            'Priority support',
+          ]}
+          isCustom
+        />
+      </motion.div>
     </section>
   )
 }
