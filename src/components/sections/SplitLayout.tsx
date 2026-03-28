@@ -501,7 +501,7 @@ export default function SplitLayout() {
                 </button>
                 {/* Hover card */}
                 <div className="absolute top-full left-0 pt-2 z-[60] opacity-0 scale-95 blur-[4px] translate-y-[-4px] pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:blur-0 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out">
-                  <div className="bg-white rounded-xl shadow-card p-3 min-w-[180px]">
+                  <div className="bg-[#ffffff] rounded-xl shadow-card p-3 min-w-[180px]">
                     <p className="text-xs text-muted mb-2">Want to know more?</p>
                     <button
                       onClick={() => setAboutModalOpen(true)}
