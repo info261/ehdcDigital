@@ -392,10 +392,6 @@ export default function SplitLayout() {
               className="mb-12 flex items-center justify-between"
             >
               <div className="relative group">
-                {/* Tooltip */}
-                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] font-medium text-white bg-foreground rounded-md whitespace-nowrap transition-all duration-300 ease-out pointer-events-none opacity-0 scale-[0.85] blur-[4px] translate-y-[-4px] group-hover:opacity-100 group-hover:scale-100 group-hover:blur-0 group-hover:translate-y-0">
-                  Learn more about me
-                </div>
                 <button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className="flex items-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full"
@@ -408,6 +404,23 @@ export default function SplitLayout() {
                   />
                   <span className="text-sm font-semibold text-foreground">ehdcDigital</span>
                 </button>
+                {/* Hover card */}
+                <div className="absolute top-full left-0 pt-2 opacity-0 scale-95 blur-[4px] translate-y-[-4px] pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:blur-0 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out">
+                  <div className="bg-white rounded-xl shadow-card p-3 min-w-[180px]">
+                    <p className="text-xs text-muted mb-2">Want to know more?</p>
+                    <a
+                      href="https://contra.com/erik_hudec_tfzihkdd"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 h-8 px-3 text-xs font-medium bg-foreground text-white rounded-lg hover:bg-foreground/90 transition-colors duration-200"
+                    >
+                      About me
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-xs text-muted">Follow me</span>
