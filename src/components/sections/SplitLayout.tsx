@@ -475,6 +475,15 @@ function TestimonialSlider() {
 
 export default function SplitLayout() {
   const [aboutModalOpen, setAboutModalOpen] = useState(false)
+  const [showHoverHint, setShowHoverHint] = useState(false)
+
+  // Show hover hint after 10 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowHoverHint(true)
+    }, 10000)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <>
@@ -498,7 +507,10 @@ export default function SplitLayout() {
               transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="mb-12 flex items-center justify-between relative z-[60]"
             >
-              <div className="relative group z-[60]">
+              <div
+                className="relative group z-[60]"
+                onMouseEnter={() => setShowHoverHint(false)}
+              >
                 <button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className="flex items-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full"
@@ -511,6 +523,38 @@ export default function SplitLayout() {
                   />
                   <span className="text-sm font-semibold text-foreground">ehdcDigital</span>
                 </button>
+
+                {/* Doodle hover hint */}
+                <AnimatePresence>
+                  {showHoverHint && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      className="absolute -bottom-12 left-0 flex items-center gap-1 pointer-events-none"
+                    >
+                      {/* Doodle arrow */}
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        className="text-foreground/60 -rotate-[135deg] animate-bounce"
+                      >
+                        <path
+                          d="M12 4C12 4 12 14 12 16M12 16C10 14 8 12.5 6 12M12 16C14 14 16 12.5 18 12"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          style={{ strokeDasharray: 30, strokeDashoffset: 0 }}
+                        />
+                      </svg>
+                      <span className="text-xs text-foreground/60 font-medium whitespace-nowrap">hover over me</span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 {/* Hover card */}
                 <div className="absolute top-full left-0 pt-2 z-[60] opacity-0 scale-95 blur-[4px] translate-y-[-4px] pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:blur-0 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out">
                   <div className="bg-[#ffffff] rounded-xl shadow-card p-3 whitespace-nowrap">
