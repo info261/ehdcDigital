@@ -20,23 +20,32 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
       if (e.key === 'Escape') onClose()
     }
 
-    const preventScroll = (e: WheelEvent | TouchEvent) => {
+    const preventScroll = (e: Event) => {
       e.preventDefault()
+      e.stopPropagation()
+      return false
     }
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape)
-      document.addEventListener('wheel', preventScroll, { passive: false })
-      document.addEventListener('touchmove', preventScroll, { passive: false })
+      // Use capture phase to intercept before Lenis
+      document.addEventListener('wheel', preventScroll, { passive: false, capture: true })
+      document.addEventListener('touchmove', preventScroll, { passive: false, capture: true })
+      document.addEventListener('scroll', preventScroll, { passive: false, capture: true })
       // Stop Lenis smooth scroll
-      window.lenis?.stop()
+      if (window.lenis) {
+        window.lenis.stop()
+      }
     }
     return () => {
       document.removeEventListener('keydown', handleEscape)
-      document.removeEventListener('wheel', preventScroll)
-      document.removeEventListener('touchmove', preventScroll)
+      document.removeEventListener('wheel', preventScroll, { capture: true })
+      document.removeEventListener('touchmove', preventScroll, { capture: true })
+      document.removeEventListener('scroll', preventScroll, { capture: true })
       // Resume Lenis smooth scroll
-      window.lenis?.start()
+      if (window.lenis) {
+        window.lenis.start()
+      }
     }
   }, [isOpen, onClose])
 
