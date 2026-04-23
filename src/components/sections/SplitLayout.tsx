@@ -1,8 +1,8 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect, useCallback } from 'react'
-import { projects } from '@/data/content'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { projects, caseStudies } from '@/data/content'
 import { Logo } from '@/components/Logo'
 import {
   Palette,
@@ -11,6 +11,12 @@ import {
   GitBranch,
   XLogo,
   X,
+  CaretLeft,
+  CaretRight,
+  ArrowUp,
+  ArrowDown,
+  Command,
+  MagnifyingGlass,
 } from '@phosphor-icons/react'
 
 function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -134,6 +140,553 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
               >
                 Become a better freelancer
               </a>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+function CaseStudyModal({
+  isOpen,
+  onClose,
+  caseStudyId,
+  onNavigate,
+  onOpenSearch,
+}: {
+  isOpen: boolean
+  onClose: () => void
+  caseStudyId: number | null
+  onNavigate: (direction: 'prev' | 'next') => void
+  onOpenSearch: () => void
+}) {
+  const caseStudy = caseStudyId !== null ? caseStudies[caseStudyId] : null
+  const [pressedKey, setPressedKey] = useState<string | null>(null)
+  const leftArrowRef = useRef<HTMLButtonElement>(null)
+  const rightArrowRef = useRef<HTMLButtonElement>(null)
+
+  const imagesRef = useCallback((node: HTMLDivElement | null) => {
+    if (node) {
+      // Store ref for keyboard scrolling
+      (window as unknown as { __caseStudyImagesRef?: HTMLDivElement }).__caseStudyImagesRef = node
+    }
+  }, [])
+
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+
+      if (e.key === 'ArrowLeft') {
+        setPressedKey('left')
+        onNavigate('prev')
+      }
+      if (e.key === 'ArrowRight') {
+        setPressedKey('right')
+        onNavigate('next')
+      }
+
+      // CMD+K or CTRL+K to open search
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        onOpenSearch()
+      }
+
+      // Arrow up/down to scroll images
+      const imagesContainer = (window as unknown as { __caseStudyImagesRef?: HTMLDivElement }).__caseStudyImagesRef
+      if (imagesContainer) {
+        // Use instant scroll when key is held (repeat), smooth for single press
+        const scrollBehavior = e.repeat ? 'auto' : 'smooth'
+        const scrollAmount = e.repeat ? 80 : 150
+
+        if (e.key === 'ArrowUp') {
+          e.preventDefault()
+          setPressedKey('up')
+          imagesContainer.scrollBy({ top: -scrollAmount, behavior: scrollBehavior })
+        }
+        if (e.key === 'ArrowDown') {
+          e.preventDefault()
+          setPressedKey('down')
+          imagesContainer.scrollBy({ top: scrollAmount, behavior: scrollBehavior })
+        }
+      }
+    }
+
+    const handleKeyup = () => {
+      setPressedKey(null)
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeydown)
+      document.addEventListener('keyup', handleKeyup)
+      // Stop Lenis and lock body scroll
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const lenis = (window as any).__lenis
+      if (lenis) lenis.stop()
+      document.body.style.overflow = 'hidden'
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeydown)
+      document.removeEventListener('keyup', handleKeyup)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const lenis = (window as any).__lenis
+      if (lenis) lenis.start()
+      document.body.style.overflow = ''
+    }
+  }, [isOpen, onClose, onNavigate, onOpenSearch])
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  }
+
+  const staggerItem = {
+    hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+    },
+  }
+
+  if (!caseStudy) return null
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="case-study-title"
+        >
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 bg-foreground/40 backdrop-blur-sm"
+            onClick={onClose}
+          />
+
+          {/* Modal wrapper - allows arrows to overflow */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="relative z-[105]"
+          >
+            {/* Navigation arrows - positioned at modal edges */}
+            <button
+              ref={leftArrowRef}
+              onClick={(e) => { e.stopPropagation(); onNavigate('prev') }}
+              className={`absolute -left-14 top-1/2 -translate-y-1/2 z-[110] w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-button text-foreground/70 hover:text-foreground hover:bg-[#f8f8f8] hover:shadow-button-hover active:scale-[0.92] transition-all duration-150 ${
+                pressedKey === 'left' ? 'scale-[0.92]' : ''
+              }`}
+              aria-label="Previous case study"
+            >
+              <CaretLeft size={16} weight="bold" />
+            </button>
+            <button
+              ref={rightArrowRef}
+              onClick={(e) => { e.stopPropagation(); onNavigate('next') }}
+              className={`absolute -right-14 top-1/2 -translate-y-1/2 z-[110] w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-button text-foreground/70 hover:text-foreground hover:bg-[#f8f8f8] hover:shadow-button-hover active:scale-[0.92] transition-all duration-150 ${
+                pressedKey === 'right' ? 'scale-[0.92]' : ''
+              }`}
+              aria-label="Next case study"
+            >
+              <CaretRight size={16} weight="bold" />
+            </button>
+
+            {/* Modal content */}
+            <div className="relative flex flex-col w-[70vw] max-h-[85vh] bg-background rounded-2xl shadow-elevated overflow-hidden">
+              {/* Close button - top right */}
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg bg-white/80 shadow-subtle text-foreground/50 hover:text-foreground hover:bg-white hover:shadow-card transition-all duration-200 z-20"
+                aria-label="Close modal"
+              >
+                <X size={16} weight="bold" />
+              </button>
+
+              {/* Main content row */}
+              <div className="flex flex-1 min-h-0">
+                {/* Left side - Content (35%) */}
+                <div
+                  className="w-[35%] p-8 pb-20 overflow-y-auto border-r border-border/50 scrollbar-hide"
+                  data-lenis-prevent
+                >
+              <motion.div
+                key={`content-${caseStudyId}`}
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+              >
+                <motion.div variants={staggerItem} className="mb-6">
+                  <span className="text-xs text-muted uppercase tracking-wider">{caseStudy.year}</span>
+                  <h2 id="case-study-title" className="text-2xl font-heading font-semibold text-foreground mt-1">
+                    {caseStudy.title}
+                  </h2>
+                  <p className="text-muted">{caseStudy.subtitle}</p>
+                </motion.div>
+
+                <motion.div variants={staggerItem} className="flex flex-wrap gap-2 mb-8">
+                  {caseStudy.services.map((service, i) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1 text-xs font-medium bg-foreground/5 text-foreground/70 rounded-full"
+                    >
+                      {service}
+                    </span>
+                  ))}
+                </motion.div>
+
+                <motion.div variants={staggerItem} className="mb-6">
+                  <h3 className="text-xs font-medium uppercase tracking-wider text-muted mb-2">Overview</h3>
+                  <p className="text-sm text-foreground/70 leading-relaxed">{caseStudy.overview}</p>
+                </motion.div>
+
+                <motion.div variants={staggerItem} className="mb-6">
+                  <h3 className="text-xs font-medium uppercase tracking-wider text-muted mb-2">Challenge</h3>
+                  <p className="text-sm text-foreground/70 leading-relaxed">{caseStudy.challenge}</p>
+                </motion.div>
+
+                <motion.div variants={staggerItem} className="mb-6">
+                  <h3 className="text-xs font-medium uppercase tracking-wider text-muted mb-2">Solution</h3>
+                  <p className="text-sm text-foreground/70 leading-relaxed">{caseStudy.solution}</p>
+                </motion.div>
+
+                <motion.div variants={staggerItem} className="mb-8">
+                  <h3 className="text-xs font-medium uppercase tracking-wider text-muted mb-3">Results</h3>
+                  <div className="grid grid-cols-3 gap-3">
+                    {caseStudy.results.map((result, i) => (
+                      <div key={i} className="text-center p-3 bg-foreground/5 rounded-xl">
+                        <div className="text-xl font-semibold text-foreground">{result.metric}</div>
+                        <div className="text-xs text-muted">{result.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {caseStudy.testimonial && (
+                  <motion.div variants={staggerItem} className="p-4 bg-foreground/5 rounded-xl">
+                    <p className="text-sm text-foreground/70 italic mb-3">"{caseStudy.testimonial.quote}"</p>
+                    <div className="text-xs">
+                      <span className="font-medium text-foreground">{caseStudy.testimonial.author}</span>
+                      <span className="text-muted"> · {caseStudy.testimonial.role}</span>
+                    </div>
+                  </motion.div>
+                )}
+              </motion.div>
+            </div>
+
+            {/* Right side - Images (65%) */}
+            <div
+              ref={imagesRef}
+              className="w-[65%] pt-14 px-6 pb-6 overflow-y-auto bg-foreground/[0.02] scrollbar-hide"
+              data-lenis-prevent
+            >
+              <div className="space-y-4">
+                {caseStudy.images.map((image, i) => (
+                  <motion.div
+                    key={`${caseStudyId}-${i}`}
+                    initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    transition={{ duration: 0.6, delay: 0.3 + i * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="rounded-xl overflow-hidden shadow-card"
+                  >
+                    <img
+                      src={image}
+                      alt={`${caseStudy.title} - Image ${i + 1}`}
+                      className="w-full h-auto"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+              </div>
+              </div>
+
+              {/* Keyboard legend bar - full width at bottom */}
+              <div className="flex items-center justify-between px-6 py-3 bg-background border-t border-border/50">
+                {/* Left - viewing count */}
+                <span className="text-xs text-muted">
+                  Viewing <span className="text-foreground font-medium">{(caseStudyId ?? 0) + 1}</span> of <span className="text-foreground font-medium">{caseStudies.length}</span> case studies
+                </span>
+
+                {/* Right - keyboard shortcuts */}
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => onNavigate('prev')}
+                    className="flex items-center gap-1.5 hover:opacity-70 transition-opacity duration-200"
+                  >
+                    <div className={`w-7 h-7 flex items-center justify-center rounded-lg bg-white/50 shadow-subtle transition-all duration-150 active:scale-[0.92] ${pressedKey === 'left' ? 'scale-[0.92] bg-white' : ''}`}>
+                      <CaretLeft size={14} weight="bold" className="text-foreground/50" />
+                    </div>
+                    <span className="text-[10px] text-muted">Previous</span>
+                  </button>
+
+                  <button
+                    onClick={() => onNavigate('next')}
+                    className="flex items-center gap-1.5 hover:opacity-70 transition-opacity duration-200"
+                  >
+                    <div className={`w-7 h-7 flex items-center justify-center rounded-lg bg-white/50 shadow-subtle transition-all duration-150 active:scale-[0.92] ${pressedKey === 'right' ? 'scale-[0.92] bg-white' : ''}`}>
+                      <CaretRight size={14} weight="bold" className="text-foreground/50" />
+                    </div>
+                    <span className="text-[10px] text-muted">Next</span>
+                  </button>
+
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => {
+                        const container = (window as unknown as { __caseStudyImagesRef?: HTMLDivElement }).__caseStudyImagesRef
+                        if (container) container.scrollBy({ top: -150, behavior: 'smooth' })
+                      }}
+                      className={`w-7 h-7 flex items-center justify-center rounded-lg bg-white/50 shadow-subtle transition-all duration-150 hover:bg-white active:scale-[0.92] ${pressedKey === 'up' ? 'scale-[0.92] bg-white' : ''}`}
+                    >
+                      <ArrowUp size={14} weight="bold" className="text-foreground/50" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        const container = (window as unknown as { __caseStudyImagesRef?: HTMLDivElement }).__caseStudyImagesRef
+                        if (container) container.scrollBy({ top: 150, behavior: 'smooth' })
+                      }}
+                      className={`w-7 h-7 flex items-center justify-center rounded-lg bg-white/50 shadow-subtle transition-all duration-150 hover:bg-white active:scale-[0.92] ${pressedKey === 'down' ? 'scale-[0.92] bg-white' : ''}`}
+                    >
+                      <ArrowDown size={14} weight="bold" className="text-foreground/50" />
+                    </button>
+                    <span className="text-[10px] text-muted">Scroll</span>
+                  </div>
+
+                  <button
+                    onClick={onOpenSearch}
+                    className="flex items-center gap-1.5 hover:opacity-70 transition-opacity duration-200"
+                  >
+                    <div className="h-7 flex items-center gap-1 px-2 rounded-lg bg-white/50 shadow-subtle">
+                      <Command size={14} weight="bold" className="text-foreground/50" />
+                      <span className="text-xs font-medium text-foreground/50">K</span>
+                    </div>
+                    <span className="text-[10px] text-muted">Search</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+function SearchModal({
+  isOpen,
+  onClose,
+  onSelectCaseStudy,
+}: {
+  isOpen: boolean
+  onClose: () => void
+  onSelectCaseStudy: (id: number) => void
+}) {
+  const [query, setQuery] = useState('')
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const filteredCaseStudies = caseStudies.filter(
+    (cs) =>
+      cs.title.toLowerCase().includes(query.toLowerCase()) ||
+      cs.subtitle.toLowerCase().includes(query.toLowerCase()) ||
+      cs.services.some((s) => s.toLowerCase().includes(query.toLowerCase()))
+  )
+
+  const categories = [...new Set(caseStudies.flatMap((cs) => cs.services))]
+  const filteredCategories = categories.filter((cat) =>
+    cat.toLowerCase().includes(query.toLowerCase())
+  )
+
+  // Total selectable items
+  const totalItems = filteredCaseStudies.length + (query ? filteredCategories.length : 0)
+
+  // Reset selection when query changes
+  useEffect(() => {
+    setSelectedIndex(0)
+  }, [query])
+
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus()
+    }
+    if (!isOpen) {
+      setQuery('')
+      setSelectedIndex(0)
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.stopImmediatePropagation()
+        onClose()
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        setSelectedIndex((prev) => (prev + 1) % Math.max(totalItems, 1))
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        setSelectedIndex((prev) => (prev - 1 + Math.max(totalItems, 1)) % Math.max(totalItems, 1))
+      }
+
+      if (e.key === 'Enter' && totalItems > 0) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        // If selected is a case study
+        if (selectedIndex < filteredCaseStudies.length) {
+          handleSelectCaseStudy(filteredCaseStudies[selectedIndex].id)
+        } else {
+          // It's a category - set as query
+          const categoryIndex = selectedIndex - filteredCaseStudies.length
+          setQuery(filteredCategories[categoryIndex])
+        }
+      }
+    }
+
+    if (isOpen) {
+      // Use capture phase to intercept before other handlers
+      document.addEventListener('keydown', handleKeydown, { capture: true })
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeydown, { capture: true })
+    }
+  }, [isOpen, onClose, totalItems, selectedIndex, filteredCaseStudies, filteredCategories])
+
+  const handleSelectCaseStudy = (id: number) => {
+    onSelectCaseStudy(id)
+    onClose()
+    setQuery('')
+  }
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-[200] flex items-start justify-center pt-[15vh]"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Search case studies"
+        >
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 bg-foreground/50 backdrop-blur-sm"
+            onClick={onClose}
+          />
+
+          {/* Search modal */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="relative z-10 w-full max-w-lg bg-background rounded-2xl shadow-elevated overflow-hidden"
+          >
+            {/* Search input */}
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-border/50">
+              <MagnifyingGlass size={20} weight="bold" className="text-muted" />
+              <input
+                ref={inputRef}
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search case studies, categories..."
+                className="flex-1 bg-transparent text-foreground placeholder:text-muted outline-none text-sm"
+              />
+              <div className="flex items-center gap-1 px-2 py-1 rounded-md bg-foreground/5">
+                <span className="text-xs text-muted">ESC</span>
+              </div>
+            </div>
+
+            {/* Results */}
+            <div className="max-h-[50vh] overflow-y-auto p-2">
+              {/* Case Studies */}
+              {filteredCaseStudies.length > 0 && (
+                <div className="mb-2">
+                  <div className="px-2 py-1 text-xs font-medium text-muted uppercase tracking-wider">
+                    Case Studies
+                  </div>
+                  {filteredCaseStudies.map((cs, index) => (
+                    <button
+                      key={cs.id}
+                      onClick={() => handleSelectCaseStudy(cs.id)}
+                      onMouseEnter={() => setSelectedIndex(index)}
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors duration-150 text-left ${
+                        selectedIndex === index ? 'bg-foreground/5' : 'hover:bg-foreground/5'
+                      }`}
+                    >
+                      <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
+                        <img
+                          src={cs.images[0]}
+                          alt={cs.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-medium text-foreground">{cs.title}</div>
+                        <div className="text-xs text-muted truncate">{cs.subtitle}</div>
+                      </div>
+                      <CaretRight size={14} className="text-muted" />
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* Categories */}
+              {filteredCategories.length > 0 && query && (
+                <div>
+                  <div className="px-2 py-1 text-xs font-medium text-muted uppercase tracking-wider">
+                    Categories
+                  </div>
+                  {filteredCategories.map((cat, index) => {
+                    const itemIndex = filteredCaseStudies.length + index
+                    return (
+                      <button
+                        key={cat}
+                        onClick={() => setQuery(cat)}
+                        onMouseEnter={() => setSelectedIndex(itemIndex)}
+                        className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors duration-150 text-left ${
+                          selectedIndex === itemIndex ? 'bg-foreground/5' : 'hover:bg-foreground/5'
+                        }`}
+                      >
+                        <div className="w-8 h-8 rounded-lg bg-foreground/5 flex items-center justify-center flex-shrink-0">
+                          <Sparkle size={14} className="text-foreground/50" />
+                        </div>
+                        <span className="text-sm text-foreground">{cat}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+              )}
+
+              {/* No results */}
+              {query && filteredCaseStudies.length === 0 && filteredCategories.length === 0 && (
+                <div className="px-3 py-8 text-center text-sm text-muted">
+                  No results found for "{query}"
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
@@ -502,10 +1055,43 @@ function TestimonialSlider() {
 
 export default function SplitLayout() {
   const [aboutModalOpen, setAboutModalOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [caseStudyModal, setCaseStudyModal] = useState<{ isOpen: boolean; id: number | null }>({
+    isOpen: false,
+    id: null,
+  })
+
+  const openCaseStudy = (id: number) => {
+    setCaseStudyModal({ isOpen: true, id })
+  }
+
+  const closeCaseStudy = () => {
+    setCaseStudyModal({ isOpen: false, id: null })
+  }
+
+  const navigateCaseStudy = (direction: 'prev' | 'next') => {
+    if (caseStudyModal.id === null) return
+    const newId = direction === 'prev'
+      ? (caseStudyModal.id - 1 + caseStudies.length) % caseStudies.length
+      : (caseStudyModal.id + 1) % caseStudies.length
+    setCaseStudyModal({ isOpen: true, id: newId })
+  }
 
   return (
     <>
       <AboutModal isOpen={aboutModalOpen} onClose={() => setAboutModalOpen(false)} />
+      <CaseStudyModal
+        isOpen={caseStudyModal.isOpen}
+        onClose={closeCaseStudy}
+        caseStudyId={caseStudyModal.id}
+        onNavigate={navigateCaseStudy}
+        onOpenSearch={() => setSearchOpen(true)}
+      />
+      <SearchModal
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        onSelectCaseStudy={openCaseStudy}
+      />
     <div className="relative">
       <div className="flex flex-col lg:flex-row min-h-screen relative z-10">
         {/* Left Side - Sticky Hero (20%) */}
@@ -757,31 +1343,60 @@ export default function SplitLayout() {
               role="list"
               aria-label="Project portfolio"
             >
-              {projects.map((project, index) => (
-                <motion.li
-                  key={project.title}
-                  variants={staggerItem}
-                  className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-card image-outline"
-                  aria-label={`Project ${index + 1}: ${project.title}`}
-                >
-                  {project.video ? (
-                    <video
-                      src={project.video}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  ) : (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  )}
-                </motion.li>
-              ))}
+              {projects.map((project, index) => {
+                // TODO: Set to true to enable case studies feature
+                const CASE_STUDIES_ENABLED = false
+                const hasCaseStudy = CASE_STUDIES_ENABLED && project.caseStudyId !== undefined
+
+                const handleClick = () => {
+                  if (hasCaseStudy) {
+                    openCaseStudy(project.caseStudyId!)
+                  }
+                }
+
+                return (
+                  <motion.li
+                    key={project.title}
+                    variants={staggerItem}
+                    className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-card image-outline group"
+                    aria-label={`Project ${index + 1}: ${project.title}`}
+                  >
+                    {hasCaseStudy ? (
+                      <button
+                        onClick={handleClick}
+                        className="absolute inset-0 w-full h-full cursor-pointer z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 focus-visible:ring-inset"
+                        aria-label={`View ${project.title} case study`}
+                      >
+                        <span className="sr-only">View case study</span>
+                      </button>
+                    ) : null}
+                    {project.video ? (
+                      <video
+                        src={project.video}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    ) : (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    )}
+                    {/* Hover overlay for case study items */}
+                    {hasCaseStudy && (
+                      <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300 flex items-center justify-center pointer-events-none">
+                        <span className="opacity-0 group-hover:opacity-100 transition-all duration-300 scale-95 group-hover:scale-100 inline-flex items-center gap-2 h-9 px-4 text-xs font-medium bg-white text-foreground/70 shadow-button rounded-[13px]">
+                          View Case Study
+                        </span>
+                      </div>
+                    )}
+                  </motion.li>
+                )
+              })}
             </motion.ul>
 
           </div>
