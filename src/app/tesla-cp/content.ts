@@ -394,10 +394,10 @@ export const teslaCpHtml = `<!DOCTYPE html>
           <div class="loc-opt rec">
             <div class="loc-hdr"><span class="loc-badge">Odporúčam</span><span class="loc-nm"><img src="https://dhygzobemt712.cloudfront.net/Mark/Mark_Logo_Blue.svg" width="14" height="14" style="vertical-align:middle;margin-right:5px;filter:brightness(0) invert(1)">Webflow Localization</span></div>
             <div class="loc-body">
-              <div class="loc-row"><span class="lk">Model platby</span><span class="lv good">$9–29 / locale / mes.</span></div>
+              <div class="loc-row"><span class="lk">Model platby</span><span class="lv good">$9 / locale / mes. (Basic)</span></div>
               <div class="loc-row"><span class="lk">Preklady žijú</span><span class="lv good">vo Webflow</span></div>
-              <div class="loc-row"><span class="lk">Vlastníctvo</span><span class="lv good">Áno — navždy</span></div>
-              <div class="loc-row"><span class="lk">SEO (hreflang)</span><span class="lv good">Natívne</span></div>
+              <div class="loc-row"><span class="lk">Vlastníctvo</span><span class="lv warn">Len počas platného plánu</span></div>
+              <div class="loc-row"><span class="lk">SEO (hreflang)</span><span class="lv warn">Nie je v Basic pláne</span></div>
               <div class="loc-row"><span class="lk">Správa</span><span class="lv">V Webflow Designeri</span></div>
             </div>
           </div>
@@ -424,7 +424,7 @@ export const teslaCpHtml = `<!DOCTYPE html>
             </tbody>
           </table>
         </div>
-        <div class="rec-note"><strong>Odporúčanie:</strong> Pre tento projekt odporúčam <strong>Webflow Localization</strong> — preklady zostávajú klientovi, správa je jednoduchá a cena predvídateľná. Weglot dáva zmysel pri 6+ jazykoch alebo externom prekladateľovi.</div>
+        <div class="rec-note"><strong>Odporúčanie:</strong> Pre tento projekt odporúčam <strong>Webflow Localization Basic</strong> ($9/locale/mes.) — najlacnejšia možnosť, preklady spravované priamo vo Webflow. Bez hreflang SEO tagov – tie sú dostupné až v Advanced pláne. Weglot má hreflang v základe a môže byť výhodnejší ak je SEO pre jazykové verzie priorita.</div>
       </div>
     </div>
 
