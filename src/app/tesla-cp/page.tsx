@@ -5,12 +5,18 @@ import { teslaCpHtml } from './content'
 
 export default function TeslaCpPage() {
   const [input, setInput] = useState('')
-  const [unlocked, setUnlocked] = useState(false)
+  const [unlocked, setUnlocked] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('tesla-cp-auth') === '1'
+    }
+    return false
+  })
   const [error, setError] = useState(false)
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (input === 'teslaholding2026') {
+      sessionStorage.setItem('tesla-cp-auth', '1')
       setUnlocked(true)
       setError(false)
     } else {
