@@ -188,11 +188,6 @@ export const projects: Project[] = [
     caseStudyId: 1,
   },
   {
-    title: 'Work For All',
-    image: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/6816dc5ffa44328a5a8e8e09_workforall-hero.jpeg',
-    caseStudyId: 2,
-  },
-  {
     title: 'Project 7',
     image: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680749720dec7c4e02e2cd68_975_1x_shots_so.jpeg',
   },
