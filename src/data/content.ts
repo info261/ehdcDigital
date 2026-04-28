@@ -193,21 +193,6 @@ export const projects: Project[] = [
     caseStudyId: 2,
   },
   {
-    title: 'Tesla Services',
-    image: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/6816dc5f1a2b3c4d5e6f7a8b_tesla-hero.jpeg',
-    caseStudyId: 3,
-  },
-  {
-    title: 'Enstra',
-    image: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/6816dc5f4d5e6f7a8b9c0d1e_enstra-hero.jpeg',
-    caseStudyId: 4,
-  },
-  {
-    title: 'TDM 2000 International',
-    image: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/6816dc5f7a8b9c0d1e2f3a4b_tdm-hero.jpeg',
-    caseStudyId: 5,
-  },
-  {
     title: 'Project 7',
     image: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680749720dec7c4e02e2cd68_975_1x_shots_so.jpeg',
   },
