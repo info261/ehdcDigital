@@ -286,6 +286,7 @@ export const teslaCpHtml = `<!DOCTYPE html>
         <li class="nav-item"><a href="#loc"><span class="nav-num">03</span>Lokalizácia</a></li>
         <li class="nav-item"><a href="#pay"><span class="nav-num">04</span>Platba &amp; harmonogram</a></li>
         <li class="nav-item"><a href="#excl"><span class="nav-num">05</span>Čo nie je v cene</a></li>
+        <li class="nav-item"><a href="#ai"><span class="nav-num">AI</span>AI &amp; AEO</a></li>
       </ul>
     </nav>
     <div class="sidebar-contact">
@@ -367,7 +368,11 @@ export const teslaCpHtml = `<!DOCTYPE html>
               <tr><td class="it">Cookie consent</td><td class="de">Implementácia pre všetky weby</td><td class="pr">100 €</td></tr>
               <tr><td class="it">Testovanie &amp; QA</td><td class="de">Cross-browser, cross-device testovanie pred spustením</td><td class="pr">200 €</td></tr>
               <tr><td class="it">Dokumentácia</td><td class="de">Návod na správu CMS, Loom video walkthrough</td><td class="pr">100 €</td></tr>
-              <tr class="tot"><td colspan="2"><strong>CELKOM vývojové práce (bez DPH)</strong></td><td><strong>11 200 €</strong></td></tr>
+              <tr class="gr"><td colspan="3">AI &amp; AEO — spoločný základ</td></tr>
+              <tr><td class="it">AEO setup</td><td class="de">Answer Engine Optimization pre Perplexity, ChatGPT, Google AI Overviews — štruktúra odpovedí, citovateľný obsah</td><td class="pr">600 €</td></tr>
+              <tr><td class="it">llms.txt &amp; AI crawlers</td><td class="de">Konfigurácia llms.txt, robots.txt rozšírenie pre LLM crawlery, AI-friendly sitemap</td><td class="pr">200 €</td></tr>
+              <tr><td class="it">LLM content štruktúra</td><td class="de">Štruktúrovanie obsahu pre citácie LLM modelov — FAQ schema, entity markup, sémantické bloky</td><td class="pr">300 €</td></tr>
+              <tr class="tot"><td colspan="2"><strong>CELKOM vývojové práce (bez DPH)</strong></td><td><strong>13 440 €</strong></td></tr>
             </tbody>
           </table>
         </div>
@@ -378,7 +383,7 @@ export const teslaCpHtml = `<!DOCTYPE html>
           </div>
           <div class="disc-r">
             <div class="disc-sm">Celková cena po zľave</div>
-            <div class="disc-amt">10 304 €<span>bez DPH</span></div>
+            <div class="disc-amt">12 365 €<span>bez DPH</span></div>
           </div>
         </div>
         <div class="note"><strong>Poznámka:</strong> Cena za <em>Lokalizácia – setup</em> zahŕňa technickú implementáciu (lokály, locale switcher, prepojenie CMS). Nezahŕňa preklad textov ani mesačné poplatky za platformu.</div>
