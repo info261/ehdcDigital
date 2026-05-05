@@ -286,7 +286,6 @@ export const teslaCpHtml = `<!DOCTYPE html>
         <li class="nav-item"><a href="#loc"><span class="nav-num">03</span>Lokalizácia</a></li>
         <li class="nav-item"><a href="#pay"><span class="nav-num">04</span>Platba &amp; harmonogram</a></li>
         <li class="nav-item"><a href="#excl"><span class="nav-num">05</span>Čo nie je v cene</a></li>
-        <li class="nav-item"><a href="#ai"><span class="nav-num">AI</span>AI &amp; AEO</a></li>
       </ul>
     </nav>
     <div class="sidebar-contact">
