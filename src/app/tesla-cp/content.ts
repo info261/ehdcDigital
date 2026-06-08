@@ -340,37 +340,37 @@ export const teslaCpHtml = `<!DOCTYPE html>
             <thead><tr><th style="width:28%">Položka</th><th>Popis</th><th style="width:110px">Cena</th></tr></thead>
             <tbody>
               <tr class="gr"><td colspan="3">Design system — spoločný základ</td></tr>
-              <tr><td class="it">Design system</td><td class="de">Jednotný vizuálny systém, komponenty, typografia – podľa brand manuálu</td><td class="pr">900 €</td></tr>
-              <tr><td class="it">Webflow template</td><td class="de">Hlavný template (reusable sekcie, symboly) pre všetky 4 weby</td><td class="pr">700 €</td></tr>
+              <tr><td class="it">Design system</td><td class="de">Jednotný vizuálny systém, komponenty, typografia – podľa brand manuálu</td><td class="pr">1 020 €</td></tr>
+              <tr><td class="it">Webflow template</td><td class="de">Hlavný template (reusable sekcie, symboly) pre všetky 4 weby</td><td class="pr">790 €</td></tr>
               <tr class="gr"><td colspan="3">1 · Tesla Energy Group</td></tr>
-              <tr><td class="it">Web design &amp; dev</td><td class="de">Redesign a vývoj webu, responsívny dizajn, on-page SEO</td><td class="pr">2 000 €</td></tr>
-              <tr><td class="it">CMS – blog &amp; referencie</td><td class="de">CMS kolekcie pre blog a realizované projekty</td><td class="pr">400 €</td></tr>
-              <tr><td class="it">CMS – produkty</td><td class="de">Produktové portfólio s parametrami a filtrovaním</td><td class="pr">400 €</td></tr>
-              <tr><td class="it">Lokalizácia – setup</td><td class="de">Technické nastavenie CZ/EN/PL + príprava pre HU/DE/HR</td><td class="pr">200 €</td></tr>
-              <tr><td class="it">AI/SEO štruktúra</td><td class="de">Schema markup, structured data, sémantické HTML</td><td class="pr">200 €</td></tr>
+              <tr><td class="it">Web design &amp; dev</td><td class="de">Redesign a vývoj webu, responsívny dizajn, on-page SEO</td><td class="pr">2 210 €</td></tr>
+              <tr><td class="it">CMS – blog &amp; referencie</td><td class="de">CMS kolekcie pre blog a realizované projekty</td><td class="pr">450 €</td></tr>
+              <tr><td class="it">CMS – produkty</td><td class="de">Produktové portfólio s parametrami a filtrovaním</td><td class="pr">450 €</td></tr>
+              <tr><td class="it">Lokalizácia – setup</td><td class="de">Technické nastavenie CZ/EN/PL + príprava pre HU/DE/HR</td><td class="pr">230 €</td></tr>
+              <tr><td class="it">AI/SEO štruktúra</td><td class="de">Schema markup, structured data, sémantické HTML</td><td class="pr">230 €</td></tr>
               <tr class="gr"><td colspan="3">2 · Tesla Energy Holding</td></tr>
-              <tr><td class="it">Web design &amp; dev</td><td class="de">Vizitkový web holdingu, prezentácia firiem, navigácia</td><td class="pr">900 €</td></tr>
-              <tr><td class="it">Lokalizácia – setup</td><td class="de">Nastavenie lokalizačnej platformy CZ/EN/PL</td><td class="pr">200 €</td></tr>
-              <tr><td class="it">AI/SEO štruktúra</td><td class="de">Schema markup, structured data, sémantické HTML</td><td class="pr">200 €</td></tr>
+              <tr><td class="it">Web design &amp; dev</td><td class="de">Vizitkový web holdingu, prezentácia firiem, navigácia</td><td class="pr">1 020 €</td></tr>
+              <tr><td class="it">Lokalizácia – setup</td><td class="de">Nastavenie lokalizačnej platformy CZ/EN/PL</td><td class="pr">230 €</td></tr>
+              <tr><td class="it">AI/SEO štruktúra</td><td class="de">Schema markup, structured data, sémantické HTML</td><td class="pr">230 €</td></tr>
               <tr class="gr"><td colspan="3">3 · Tesla Transformátory</td></tr>
-              <tr><td class="it">Web design &amp; dev</td><td class="de">Produktový web s kategóriami, PDF download centrum</td><td class="pr">1 600 €</td></tr>
-              <tr><td class="it">CMS – produkty</td><td class="de">Filtrovateľné portfólio transformátorov podľa kategórií</td><td class="pr">500 €</td></tr>
-              <tr><td class="it">Lokalizácia – setup</td><td class="de">Nastavenie lokalizačnej platformy CZ/EN</td><td class="pr">200 €</td></tr>
-              <tr><td class="it">AI/SEO štruktúra</td><td class="de">Schema markup, structured data, sémantické HTML</td><td class="pr">200 €</td></tr>
+              <tr><td class="it">Web design &amp; dev</td><td class="de">Produktový web s kategóriami, PDF download centrum</td><td class="pr">1 810 €</td></tr>
+              <tr><td class="it">CMS – produkty</td><td class="de">Filtrovateľné portfólio transformátorov podľa kategórií</td><td class="pr">560 €</td></tr>
+              <tr><td class="it">Lokalizácia – setup</td><td class="de">Nastavenie lokalizačnej platformy CZ/EN</td><td class="pr">230 €</td></tr>
+              <tr><td class="it">AI/SEO štruktúra</td><td class="de">Schema markup, structured data, sémantické HTML</td><td class="pr">230 €</td></tr>
               <tr class="gr"><td colspan="3">4 · Tesla Liptovský Hrádok</td></tr>
-              <tr><td class="it">Adaptácia do DS</td><td class="de">Migrácia obsahu z teslalh.eu, zapracovanie do jednotného dizajnu</td><td class="pr">900 €</td></tr>
-              <tr><td class="it">Lokalizácia – setup</td><td class="de">Nastavenie lokalizačnej platformy SK/CZ/EN/DE</td><td class="pr">200 €</td></tr>
-              <tr><td class="it">AI/SEO štruktúra</td><td class="de">Schema markup, structured data, sémantické HTML</td><td class="pr">200 €</td></tr>
+              <tr><td class="it">Adaptácia do DS</td><td class="de">Migrácia obsahu z teslalh.eu, zapracovanie do jednotného dizajnu</td><td class="pr">1 020 €</td></tr>
+              <tr><td class="it">Lokalizácia – setup</td><td class="de">Nastavenie lokalizačnej platformy SK/CZ/EN/DE</td><td class="pr">230 €</td></tr>
+              <tr><td class="it">AI/SEO štruktúra</td><td class="de">Schema markup, structured data, sémantické HTML</td><td class="pr">230 €</td></tr>
               <tr class="gr"><td colspan="3">Spoločné položky</td></tr>
-              <tr><td class="it">WCAG 2.1 AA</td><td class="de">Accessibility audit a opravy pre všetky weby</td><td class="pr">300 €</td></tr>
-              <tr><td class="it">Performance</td><td class="de">Core Web Vitals, lazy loading, optimalizácia obrázkov</td><td class="pr">200 €</td></tr>
-              <tr><td class="it">Cookie consent</td><td class="de">Implementácia pre všetky weby</td><td class="pr">100 €</td></tr>
-              <tr><td class="it">Testovanie &amp; QA</td><td class="de">Cross-browser, cross-device testovanie pred spustením</td><td class="pr">200 €</td></tr>
-              <tr><td class="it">Dokumentácia</td><td class="de">Návod na správu CMS, Loom video walkthrough</td><td class="pr">100 €</td></tr>
+              <tr><td class="it">WCAG 2.1 AA</td><td class="de">Accessibility audit a opravy pre všetky weby</td><td class="pr">340 €</td></tr>
+              <tr><td class="it">Performance</td><td class="de">Core Web Vitals, lazy loading, optimalizácia obrázkov</td><td class="pr">230 €</td></tr>
+              <tr><td class="it">Cookie consent</td><td class="de">Implementácia pre všetky weby</td><td class="pr">110 €</td></tr>
+              <tr><td class="it">Testovanie &amp; QA</td><td class="de">Cross-browser, cross-device testovanie pred spustením</td><td class="pr">230 €</td></tr>
+              <tr><td class="it">Dokumentácia</td><td class="de">Návod na správu CMS, Loom video walkthrough</td><td class="pr">110 €</td></tr>
               <tr class="gr"><td colspan="3">AI &amp; AEO — spoločný základ</td></tr>
-              <tr><td class="it">AEO setup</td><td class="de">Answer Engine Optimization pre Perplexity, ChatGPT, Google AI Overviews — štruktúra odpovedí, citovateľný obsah</td><td class="pr">600 €</td></tr>
-              <tr><td class="it">llms.txt &amp; AI crawlers</td><td class="de">Konfigurácia llms.txt, robots.txt rozšírenie pre LLM crawlery, AI-friendly sitemap</td><td class="pr">200 €</td></tr>
-              <tr><td class="it">LLM content štruktúra</td><td class="de">Štruktúrovanie obsahu pre citácie LLM modelov — FAQ schema, entity markup, sémantické bloky</td><td class="pr">300 €</td></tr>
+              <tr><td class="it">AEO setup</td><td class="de">Answer Engine Optimization pre Perplexity, ChatGPT, Google AI Overviews — štruktúra odpovedí, citovateľný obsah</td><td class="pr">680 €</td></tr>
+              <tr><td class="it">llms.txt &amp; AI crawlers</td><td class="de">Konfigurácia llms.txt, robots.txt rozšírenie pre LLM crawlery, AI-friendly sitemap</td><td class="pr">230 €</td></tr>
+              <tr><td class="it">LLM content štruktúra</td><td class="de">Štruktúrovanie obsahu pre citácie LLM modelov — FAQ schema, entity markup, sémantické bloky</td><td class="pr">340 €</td></tr>
               <tr class="tot"><td colspan="2"><strong>CELKOM vývojové práce (bez DPH)</strong></td><td><strong>13 440 €</strong></td></tr>
             </tbody>
           </table>
