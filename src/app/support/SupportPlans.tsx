@@ -4,7 +4,8 @@ import { motion } from 'framer-motion'
 import Container from '@/components/ui/Container'
 import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations'
 import NotionBoard from './NotionBoard'
-import { meta, plans, biggerNote, howItWorks, boardNote, terms, exclusions } from './content'
+import PlanCards from './PlanCards'
+import { meta, biggerNote, howItWorks, boardNote, terms, exclusions } from './content'
 
 const reveal = {
   initial: 'initial' as const,
@@ -60,110 +61,7 @@ export default function SupportPlans() {
 
         {/* ---------- plans ---------- */}
         <section className="pt-16 md:pt-20">
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          >
-            {plans.map((plan) => (
-              <motion.article
-                key={plan.name}
-                variants={staggerItem}
-                className={`relative flex flex-col rounded-3xl p-8 md:p-9 ${
-                  plan.featured
-                    ? 'bg-foreground text-background'
-                    : 'bg-white shadow-card'
-                }`}
-              >
-                <div className="flex items-center justify-between gap-3 min-h-[28px]">
-                  <span
-                    className={`text-[0.68rem] font-medium uppercase tracking-[0.16em] ${
-                      plan.featured ? 'text-background/60' : 'text-muted'
-                    }`}
-                  >
-                    {plan.name}
-                  </span>
-                  {plan.badge && (
-                    <span className="inline-block rounded-full bg-background/15 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.12em] text-background">
-                      {plan.badge}
-                    </span>
-                  )}
-                </div>
-
-                <div className="mt-6 flex items-baseline gap-2">
-                  <span
-                    className={`font-heading text-5xl font-semibold tracking-tight tabular-nums ${
-                      plan.featured ? 'text-background' : 'text-foreground'
-                    }`}
-                  >
-                    {plan.price}
-                  </span>
-                  <span className={plan.featured ? 'text-background/50 text-sm' : 'text-muted text-sm'}>
-                    / month
-                  </span>
-                </div>
-                <p
-                  className={`mt-5 text-[0.975rem] leading-relaxed ${
-                    plan.featured ? 'text-background/80' : 'text-foreground/70'
-                  }`}
-                >
-                  {plan.who}
-                </p>
-
-                {plan.inherits && (
-                  <p className="mt-7 pt-5 border-t border-background/15 text-[0.68rem] font-medium uppercase tracking-[0.14em] text-background/60">
-                    {plan.inherits}
-                  </p>
-                )}
-
-                <ul className={`space-y-4 ${plan.inherits ? 'mt-5' : 'mt-7'}`}>
-                  {plan.features.map((feature) => (
-                    <li
-                      key={feature.text}
-                      className={`flex items-start gap-3 text-[0.94rem] leading-relaxed ${
-                        plan.featured ? 'text-background/80' : 'text-foreground/75'
-                      }`}
-                    >
-                      <svg
-                        className={`w-[18px] h-[18px] mt-[3px] flex-shrink-0 ${
-                          plan.featured ? 'text-background/70' : 'text-foreground/70'
-                        }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2.2}
-                        aria-hidden="true"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>
-                        {feature.lead && (
-                          <strong
-                            className={`font-semibold ${
-                              plan.featured ? 'text-background' : 'text-foreground'
-                            }`}
-                          >
-                            {feature.lead}{' '}
-                          </strong>
-                        )}
-                        {feature.text}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                {plan.footnote && (
-                  <div className="mt-auto pt-7">
-                    <p className="pt-6 border-t border-border text-sm leading-relaxed text-muted text-pretty">
-                      {plan.footnote}
-                    </p>
-                  </div>
-                )}
-              </motion.article>
-            ))}
-          </motion.div>
+          <PlanCards />
 
           <motion.p
             {...reveal}

@@ -20,26 +20,34 @@ export type Plan = {
   who: string
   featured?: boolean
   badge?: string
+  cta: string
   inherits?: string
+  plusLabel?: string
   features: Feature[]
   footnote?: string
 }
 
 // `lead` renders in the foreground weight, `text` follows in the body tone.
-export type Feature = { lead?: string; text: string }
+// `short` is the condensed label used when Care's features are recapped
+// inside Care & Build, so the premium card visibly contains the cheaper one.
+export type Feature = { lead?: string; text: string; short?: string }
 
 export const plans: Plan[] = [
   {
     name: 'Care',
     price: '€120',
     who: 'For a site that works and needs to keep working.',
+    cta: 'Choose Care',
     features: [
-      { text: 'Small changes whenever you need them — text, prices, photos, PDFs, a new reference or news item. Add as many as you like to the board.' },
-      { text: 'Done within five working days, usually sooner.' },
-      { text: 'A backup taken before anything is touched.' },
-      { text: 'If the site goes down, the alert reaches me, not you.' },
-      { text: 'Enquiry forms tested every month, so you know they arrive.' },
-      { text: 'Domain, hosting and certificate renewals flagged a month ahead.' },
+      {
+        text: 'Small changes whenever you need them — text, prices, photos, PDFs, a new reference or news item. Add as many as you like to the board.',
+        short: 'Small changes, as many as you like',
+      },
+      { text: 'Done within five working days, usually sooner.', short: 'Done within five working days' },
+      { text: 'A backup taken before anything is touched.', short: 'A backup before anything is touched' },
+      { text: 'If the site goes down, the alert reaches me, not you.', short: 'Downtime alerts reach me, not you' },
+      { text: 'Enquiry forms tested every month, so you know they arrive.', short: 'Enquiry forms tested monthly' },
+      { text: 'Domain, hosting and certificate renewals flagged a month ahead.', short: 'Renewals flagged a month ahead' },
     ],
     footnote:
       'A small change is something I can do in under half an hour. Anything larger gets tagged “Bigger thing” on the board before I start — so you see it coming, and it never turns up on an invoice.',
@@ -50,7 +58,9 @@ export const plans: Plan[] = [
     who: 'For a site that has to keep up with the business.',
     featured: true,
     badge: 'Most clients',
-    inherits: 'Everything in Care, plus',
+    cta: 'Choose Care & Build',
+    inherits: 'Everything in Care',
+    plusLabel: 'Plus, every month',
     features: [
       {
         lead: 'One bigger thing every month.',
