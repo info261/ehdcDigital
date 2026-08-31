@@ -57,7 +57,7 @@ export const plans: Plan[] = [
     price: '€390',
     who: 'For a site that has to keep up with the business.',
     featured: true,
-    badge: 'Most clients',
+    badge: 'Most popular',
     cta: 'Choose Care & Build',
     inherits: 'Everything in Care',
     plusLabel: 'Plus, every month',

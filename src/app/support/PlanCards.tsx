@@ -87,7 +87,7 @@ export default function PlanCards() {
   const inherited = plans.find((plan) => !plan.featured)?.features ?? []
 
   return (
-    <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+    <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
       {plans.map((plan, index) => (
         <PlanCard
           key={plan.name}
@@ -123,9 +123,9 @@ function PlanCard({
         scale:   stage >= 1 ? 1 : CARD.initialScale,
       }}
       transition={{ ...CARD.spring, delay: index * CARD.stagger }}
-      className={`relative flex flex-col rounded-3xl p-8 md:p-9 ${
+      className={`relative flex flex-col rounded-3xl p-8 md:p-9 h-full ${
         dark
-          ? 'bg-foreground text-background shadow-elevated md:-mt-3 md:mb-3'
+          ? 'bg-foreground text-background shadow-elevated'
           : 'bg-white shadow-card'
       }`}
     >
@@ -248,7 +248,8 @@ function PlanCard({
         </motion.p>
       )}
 
-      {/* each card ends on its own action, directly after its content */}
+      {/* cards are equal height, so the action pins to the bottom and the
+          two buttons line up across both cards */}
       <motion.div
         initial={{ opacity: 0, y: FOOTER.offsetY }}
         animate={{
@@ -256,7 +257,7 @@ function PlanCard({
           y:       stage >= 5 ? 0 : FOOTER.offsetY,
         }}
         transition={FOOTER.spring}
-        className="pt-7"
+        className="mt-auto pt-7"
       >
         <a
           href={`mailto:${meta.email}?subject=${encodeURIComponent(`${plan.name} plan`)}`}
