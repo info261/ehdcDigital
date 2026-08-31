@@ -161,9 +161,8 @@ function ColumnHeader({
         y:       stage >= 1 ? 0 : HEADER.offsetY,
       }}
       transition={HEADER.spring}
-      className={`items-center gap-2.5 px-6 py-5 ${className}`}
+      className={`items-center px-6 py-5 ${className}`}
     >
-      <Badge tone={tone} stage={stage} index={-1} />
       <span
         className={`text-[0.72rem] font-semibold uppercase tracking-[0.14em] ${
           tone === 'good' ? 'text-foreground' : 'text-muted'
@@ -196,8 +195,8 @@ function Badge({
   stage: number
   index: number
 }) {
-  const shown = index < 0 ? stage >= 1 : stage >= 2
-  const delay = index < 0 ? 0 : index * ROW.stagger + ICON.delay
+  const shown = stage >= 2
+  const delay = index * ROW.stagger + ICON.delay
 
   return (
     <motion.span
