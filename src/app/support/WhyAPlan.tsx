@@ -11,14 +11,15 @@ import { comparison } from './content'
  * scrolls into view.
  *
  *    0ms   waiting for scroll into view
- *  100ms   the two column headers fade in
+ *  100ms   both column headers fade in
  *  260ms   rows reveal top to bottom (staggered 80ms)
- *          within each row the remedy trails the pain by 90ms,
- *          so the eye reads across: problem, then answer
+ *          within each row the answer trails the problem by 90ms,
+ *          so the eye reads across: your problem, then what I do
+ *  340ms   each icon pops in behind its line (staggered with the row)
  * ───────────────────────────────────────────────────────── */
 
 const TIMING = {
-  headers: 100,  // "Without a plan" / "With a plan" labels
+  headers: 100,  // "Without a plan" / "With a plan"
   rows:    260,  // paired rows begin revealing
 }
 
@@ -30,10 +31,23 @@ const HEADER = {
 
 /* Paired rows */
 const ROW = {
-  offsetX: 14,    // px each half slides in from, toward the centre
-  stagger: 0.08,  // seconds between rows
-  answerDelay: 0.09,  // seconds the remedy trails its pain by
+  offsetX:     14,    // px each half slides in from
+  stagger:     0.08,  // seconds between rows
+  answerDelay: 0.09,  // seconds the answer trails its problem by
   spring: { type: 'spring' as const, stiffness: 340, damping: 30 },
+}
+
+/* The ✗ / ✓ badges */
+const ICON = {
+  initialScale: 0.4,
+  delay: 0.08,  // seconds after its row starts
+  spring: { type: 'spring' as const, stiffness: 520, damping: 24 },
+}
+
+/* Red for what goes wrong today, green for what is handled. */
+const TONE = {
+  bad:  { chip: '#FEE2E2', glyph: '#DC2626' },
+  good: { chip: '#16A34A', glyph: '#FFFFFF' },
 }
 
 export default function WhyAPlan() {
@@ -56,112 +70,156 @@ export default function WhyAPlan() {
   }, [isInView])
 
   return (
-    <div ref={ref} className="rounded-3xl bg-white shadow-card overflow-hidden">
-      {/* column headers — hidden on mobile, where each pair is labelled inline */}
-      <motion.div
-        initial={{ opacity: 0, y: HEADER.offsetY }}
-        animate={{
-          opacity: stage >= 1 ? 1 : 0,
-          y:       stage >= 1 ? 0 : HEADER.offsetY,
-        }}
-        transition={HEADER.spring}
-        className="hidden md:grid md:grid-cols-2"
-      >
-        <div className="px-6 py-4 bg-[#f8fafc]">
-          <Label muted>{comparison.withoutLabel}</Label>
-        </div>
-        <div className="px-6 py-4">
-          <Label>{comparison.withLabel}</Label>
-        </div>
-      </motion.div>
+    <div
+      ref={ref}
+      className="rounded-3xl bg-white shadow-card overflow-hidden grid md:grid-cols-2"
+    >
+      {/* ---------- column headers (desktop only) ---------- */}
+      <ColumnHeader stage={stage} tone="bad" className="hidden md:flex">
+        {comparison.withoutLabel}
+      </ColumnHeader>
+      <ColumnHeader stage={stage} tone="good" className="hidden md:flex bg-[#F2FBF5]">
+        {comparison.withLabel}
+      </ColumnHeader>
 
+      {/* ---------- rows ----------
+          Cells sit directly in the grid so each pair shares a row height
+          and the two sides stay level even when one wraps to two lines. */}
       {comparison.pairs.map((pair, i) => (
-        <div key={pair.without} className="grid md:grid-cols-2 border-t border-border">
-          {/* the pain */}
-          <motion.div
-            initial={{ opacity: 0, x: -ROW.offsetX }}
-            animate={{
-              opacity: stage >= 2 ? 1 : 0,
-              x:       stage >= 2 ? 0 : -ROW.offsetX,
-            }}
-            transition={{ ...ROW.spring, delay: i * ROW.stagger }}
-            className="flex items-start gap-3 px-6 py-5 bg-[#f8fafc]"
-          >
-            <Dash />
-            <div>
-              <Label muted className="md:hidden mb-1.5">
-                {comparison.withoutLabel}
-              </Label>
-              <p className="text-[0.94rem] leading-relaxed text-muted text-pretty">
-                {pair.without}
-              </p>
-            </div>
-          </motion.div>
-
-          {/* what replaces it */}
-          <motion.div
-            initial={{ opacity: 0, x: ROW.offsetX }}
-            animate={{
-              opacity: stage >= 2 ? 1 : 0,
-              x:       stage >= 2 ? 0 : ROW.offsetX,
-            }}
-            transition={{ ...ROW.spring, delay: i * ROW.stagger + ROW.answerDelay }}
-            className="flex items-start gap-3 px-6 py-5 border-t border-border md:border-t-0"
-          >
-            <Check />
-            <div>
-              <Label className="md:hidden mb-1.5">{comparison.withLabel}</Label>
-              <p className="text-[0.94rem] leading-relaxed text-foreground/80 text-pretty">
-                {pair.with}
-              </p>
-            </div>
-          </motion.div>
-        </div>
+        <Row key={pair.without} pair={pair} index={i} stage={stage} />
       ))}
     </div>
   )
 }
 
-function Label({
+function Row({
+  pair,
+  index,
+  stage,
+}: {
+  pair: { without: string; with: string }
+  index: number
+  stage: number
+}) {
+  return (
+    <>
+      {/* the problem they have today */}
+      <motion.div
+        initial={{ opacity: 0, x: -ROW.offsetX }}
+        animate={{
+          opacity: stage >= 2 ? 1 : 0,
+          x:       stage >= 2 ? 0 : -ROW.offsetX,
+        }}
+        transition={{ ...ROW.spring, delay: index * ROW.stagger }}
+        className="flex items-start gap-3.5 px-6 py-5 border-t border-border"
+      >
+        <Badge tone="bad" stage={stage} index={index} />
+        <div className="min-w-0">
+          <MobileLabel tone="bad">{comparison.withoutLabel}</MobileLabel>
+          <p className="text-[0.94rem] leading-relaxed text-muted text-pretty">{pair.without}</p>
+        </div>
+      </motion.div>
+
+      {/* what I do about it */}
+      <motion.div
+        initial={{ opacity: 0, x: ROW.offsetX }}
+        animate={{
+          opacity: stage >= 2 ? 1 : 0,
+          x:       stage >= 2 ? 0 : ROW.offsetX,
+        }}
+        transition={{ ...ROW.spring, delay: index * ROW.stagger + ROW.answerDelay }}
+        className="flex items-start gap-3.5 px-6 py-5 border-t border-border bg-[#F2FBF5]"
+      >
+        <Badge tone="good" stage={stage} index={index} />
+        <div className="min-w-0">
+          <MobileLabel tone="good">{comparison.withLabel}</MobileLabel>
+          <p className="text-[0.94rem] leading-relaxed text-foreground/85 text-pretty">
+            {pair.with}
+          </p>
+        </div>
+      </motion.div>
+    </>
+  )
+}
+
+function ColumnHeader({
   children,
-  muted = false,
+  tone,
+  stage,
   className = '',
 }: {
   children: React.ReactNode
-  muted?: boolean
+  tone: 'bad' | 'good'
+  stage: number
   className?: string
 }) {
   return (
+    <motion.div
+      initial={{ opacity: 0, y: HEADER.offsetY }}
+      animate={{
+        opacity: stage >= 1 ? 1 : 0,
+        y:       stage >= 1 ? 0 : HEADER.offsetY,
+      }}
+      transition={HEADER.spring}
+      className={`items-center gap-2.5 px-6 py-5 ${className}`}
+    >
+      <Badge tone={tone} stage={stage} index={-1} />
+      <span
+        className={`text-[0.72rem] font-semibold uppercase tracking-[0.14em] ${
+          tone === 'good' ? 'text-foreground' : 'text-muted'
+        }`}
+      >
+        {children}
+      </span>
+    </motion.div>
+  )
+}
+
+function MobileLabel({ children, tone }: { children: React.ReactNode; tone: 'bad' | 'good' }) {
+  return (
     <span
-      className={`block text-[0.68rem] font-medium uppercase tracking-[0.16em] ${
-        muted ? 'text-muted' : 'text-foreground'
-      } ${className}`}
+      className={`md:hidden block mb-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.14em] ${
+        tone === 'good' ? 'text-[#16A34A]' : 'text-[#DC2626]'
+      }`}
     >
       {children}
     </span>
   )
 }
 
-/* A dash, not a cross: these are things going unhandled, not failures. */
-function Dash() {
-  return (
-    <span className="mt-[11px] h-px w-3 flex-shrink-0 bg-muted/60" aria-hidden="true" />
-  )
-}
+function Badge({
+  tone,
+  stage,
+  index,
+}: {
+  tone: 'bad' | 'good'
+  stage: number
+  index: number
+}) {
+  const shown = index < 0 ? stage >= 1 : stage >= 2
+  const delay = index < 0 ? 0 : index * ROW.stagger + ICON.delay
 
-function Check() {
   return (
-    <svg
-      className="w-[18px] h-[18px] mt-[3px] flex-shrink-0 text-foreground/70"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2.2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
+    <motion.span
+      initial={{ scale: ICON.initialScale }}
+      animate={{ scale: shown ? 1 : ICON.initialScale }}
+      transition={{ ...ICON.spring, delay }}
+      className="mt-[1px] flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full"
+      style={{ background: TONE[tone].chip }}
       aria-hidden="true"
     >
-      <path d="M5 13l4 4L19 7" />
-    </svg>
+      <svg
+        width="11"
+        height="11"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke={TONE[tone].glyph}
+        strokeWidth={3.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {tone === 'good' ? <path d="M5 13l4 4L19 7" /> : <path d="M6 6l12 12M18 6L6 18" />}
+      </svg>
+    </motion.span>
   )
 }
