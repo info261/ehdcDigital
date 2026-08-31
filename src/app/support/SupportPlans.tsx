@@ -60,26 +60,13 @@ export default function SupportPlans() {
           </motion.div>
         </header>
 
-        {/* ---------- why a plan (the problem, before the price) ---------- */}
+        {/* ---------- why a plan (the problem, before anything is asked) ---------- */}
         <section className="pt-16 md:pt-20">
           <SectionHead eyebrow={comparison.eyebrow} title={comparison.title} />
           <WhyAPlan />
           <p className="mt-5 text-[0.9rem] leading-relaxed text-muted text-pretty">
             {comparison.lede}
           </p>
-        </section>
-
-        {/* ---------- plans ---------- */}
-        <section className="pt-20 md:pt-24">
-          <PlanCards />
-
-          <motion.p
-            {...reveal}
-            variants={fadeInUp}
-            className="mt-6 rounded-2xl bg-[#f1f5f9] px-6 py-5 text-[0.975rem] leading-relaxed text-foreground/70 text-pretty"
-          >
-            {biggerNote}
-          </motion.p>
         </section>
 
         {/* ---------- how it works ---------- */}
@@ -125,6 +112,20 @@ export default function SupportPlans() {
               )}
             </p>
           </motion.div>
+        </section>
+
+        {/* ---------- pricing ---------- */}
+        <section className="pt-20 md:pt-24">
+          <SectionHead eyebrow="Pricing" title="What it costs" />
+          <PlanCards />
+
+          <motion.p
+            {...reveal}
+            variants={fadeInUp}
+            className="mt-6 rounded-2xl bg-[#f1f5f9] px-6 py-5 text-[0.975rem] leading-relaxed text-foreground/70 text-pretty"
+          >
+            {biggerNote}
+          </motion.p>
         </section>
 
         {/* ---------- terms ---------- */}
