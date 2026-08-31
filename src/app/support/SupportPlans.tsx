@@ -51,12 +51,9 @@ export default function SupportPlans() {
 
           <motion.div initial="initial" animate="animate" variants={fadeInUp} className="pt-12 md:pt-16">
             <Eyebrow className="mb-4">{meta.eyebrow}</Eyebrow>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-semibold tracking-tight leading-[1.05] text-foreground text-balance">
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-semibold tracking-tight leading-[1.05] text-foreground text-balance max-w-[18ch]">
               {meta.title}
             </h1>
-            <p className="mt-6 max-w-[58ch] text-lg text-muted leading-relaxed text-pretty">
-              {meta.lede}
-            </p>
           </motion.div>
         </header>
 
