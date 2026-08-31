@@ -28,38 +28,35 @@ export type Plan = {
 }
 
 // `lead` renders in the foreground weight, `text` follows in the body tone.
-// `short` is the condensed label used when Care's features are recapped
-// inside Care & Build, so the premium card visibly contains the cheaper one.
-export type Feature = { lead?: string; text: string; short?: string }
+export type Feature = { lead?: string; text: string }
 
 export const plans: Plan[] = [
   {
-    name: 'Care',
+    name: 'Base',
     price: '€120',
     who: 'For a site that works and needs to keep working.',
-    cta: 'Choose Care',
+    cta: 'Choose Base',
     features: [
       {
         text: 'Small changes whenever you need them — text, prices, photos, PDFs, a new reference or news item. Add as many as you like to the board.',
-        short: 'Small changes, as many as you like',
       },
-      { text: 'Done within five working days, usually sooner.', short: 'Done within five working days' },
-      { text: 'A backup taken before anything is touched.', short: 'A backup before anything is touched' },
-      { text: 'If the site goes down, the alert reaches me, not you.', short: 'Downtime alerts reach me, not you' },
-      { text: 'Enquiry forms tested every month, so you know they arrive.', short: 'Enquiry forms tested monthly' },
-      { text: 'Domain, hosting and certificate renewals flagged a month ahead.', short: 'Renewals flagged a month ahead' },
+      { text: 'Done within five working days, usually sooner.' },
+      { text: 'A backup taken before anything is touched.' },
+      { text: 'If the site goes down, the alert reaches me, not you.' },
+      { text: 'Enquiry forms tested every month, so you know they arrive.' },
+      { text: 'Domain, hosting and certificate renewals flagged a month ahead.' },
     ],
     footnote:
       'A small change is something I can do in under half an hour. Anything larger gets tagged “Bigger thing” on the board before I start — so you see it coming, and it never turns up on an invoice.',
   },
   {
-    name: 'Care & Build',
+    name: 'Premium',
     price: '€390',
     who: 'For a site that has to keep up with the business.',
     featured: true,
     badge: 'Most popular',
-    cta: 'Choose Care & Build',
-    inherits: 'Everything in Care',
+    cta: 'Choose Premium',
+    inherits: 'Everything in Base, included',
     plusLabel: 'Plus, every month',
     features: [
       {

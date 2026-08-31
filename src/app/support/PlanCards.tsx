@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { meta, plans, type Feature, type Plan } from './content'
+import { meta, plans, type Plan } from './content'
 
 /* ─────────────────────────────────────────────────────────
  * ANIMATION STORYBOARD
@@ -12,7 +12,7 @@ import { meta, plans, type Feature, type Plan } from './content'
  * a client is deciding to pay every month, not a product reveal.
  *
  *    0ms   waiting for scroll into view
- *  120ms   cards rise 24px and fade in (Care & Build trails 90ms)
+ *  120ms   cards rise 24px and fade in (Premium trails 90ms)
  *  380ms   prices settle, scale 0.92 → 1.0
  *  560ms   "Most clients" badge pops in
  *  680ms   feature rows slide up (staggered 55ms)
@@ -82,20 +82,10 @@ export default function PlanCards() {
     return () => timers.forEach(clearTimeout)
   }, [isInView])
 
-  // The premium card recaps what Care already covers, so the reader can
-  // see it contains the cheaper tier rather than competing with it.
-  const inherited = plans.find((plan) => !plan.featured)?.features ?? []
-
   return (
     <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
       {plans.map((plan, index) => (
-        <PlanCard
-          key={plan.name}
-          plan={plan}
-          index={index}
-          stage={stage}
-          inherited={plan.featured ? inherited : []}
-        />
+        <PlanCard key={plan.name} plan={plan} index={index} stage={stage} />
       ))}
     </div>
   )
@@ -105,12 +95,10 @@ function PlanCard({
   plan,
   index,
   stage,
-  inherited,
 }: {
   plan: Plan
   index: number
   stage: number
-  inherited: Feature[]
 }) {
   const dark = !!plan.featured
 
@@ -182,27 +170,20 @@ function PlanCard({
         {plan.who}
       </p>
 
-      {/* what Care already covers, recapped inside Care & Build */}
-      {inherited.length > 0 && (
-        <>
-          <SectionLabel dark={dark} className="mt-7 pt-5 border-t border-background/15">
-            {plan.inherits}
-          </SectionLabel>
-          <ul className="mt-4 space-y-2.5">
-            {inherited.map((feature, i) => (
-              <FeatureRow
-                key={feature.text}
-                stage={stage}
-                index={i}
-                dark={dark}
-                dimmed
-                marker="check"
-              >
-                {feature.short ?? feature.text}
-              </FeatureRow>
-            ))}
-          </ul>
-        </>
+      {/* One statement carries the containment, instead of restating every
+          Base feature as its own row. */}
+      {plan.inherits && (
+        <motion.p
+          initial={{ opacity: 0, y: FEATURE.offsetY }}
+          animate={{
+            opacity: stage >= 4 ? 1 : 0,
+            y:       stage >= 4 ? 0 : FEATURE.offsetY,
+          }}
+          transition={FEATURE.spring}
+          className="mt-7 rounded-2xl bg-background/10 px-4 py-3.5 text-[0.94rem] font-medium text-background"
+        >
+          {plan.inherits}
+        </motion.p>
       )}
 
       {/* the tier's own features */}
@@ -217,8 +198,7 @@ function PlanCard({
           <FeatureRow
             key={feature.text}
             stage={stage}
-            // the recap rows go first, so the additive rows continue the stagger
-            index={inherited.length + i}
+            index={i}
             dark={dark}
             marker={plan.plusLabel ? 'plus' : 'check'}
           >
@@ -299,27 +279,25 @@ function FeatureRow({
   stage,
   index,
   dark,
-  dimmed = false,
   marker,
 }: {
   children: React.ReactNode
   stage: number
   index: number
   dark: boolean
-  dimmed?: boolean
   marker: 'check' | 'plus'
 }) {
   return (
     <motion.li
       initial={{ opacity: 0, y: FEATURE.offsetY }}
       animate={{
-        opacity: stage >= 4 ? (dimmed ? 0.62 : 1) : 0,
+        opacity: stage >= 4 ? 1 : 0,
         y:       stage >= 4 ? 0 : FEATURE.offsetY,
       }}
       transition={{ ...FEATURE.spring, delay: index * FEATURE.stagger }}
-      className={`flex items-start gap-3 leading-relaxed ${
-        dimmed ? 'text-[0.875rem]' : 'text-[0.94rem]'
-      } ${dark ? 'text-background/80' : 'text-foreground/75'}`}
+      className={`flex items-start gap-3 text-[0.94rem] leading-relaxed ${
+        dark ? 'text-background/80' : 'text-foreground/75'
+      }`}
     >
       <Marker kind={marker} dark={dark} />
       <span>{children}</span>
