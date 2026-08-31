@@ -176,3 +176,42 @@ export const exclusions = [
   'Writing long texts from a blank page',
   'Photography, video, paid advertising',
 ]
+
+/* ---------- the case for a plan, shown before the prices ---------- */
+
+// Paired so each line reads across: the pain on the left, what replaces
+// it on the right. Every remedy is something the plans above actually
+// promise — nothing here claims more than the cards do.
+export const comparison = {
+  eyebrow: 'Why a plan',
+  title: 'What changes the day you start',
+  lede: 'Nothing here is new work. It is the same site, handled differently.',
+  withoutLabel: 'Without a plan',
+  withLabel: 'With a plan',
+  pairs: [
+    {
+      without: 'Every small job gets quoted, approved and invoiced on its own.',
+      with: 'One price a month. Add what you need — no quote, no approval.',
+    },
+    {
+      without: 'Requests live in email threads and phone calls. Some get missed.',
+      with: 'Everything sits on one board your whole team can add to.',
+    },
+    {
+      without: 'You hear the site is down from a customer.',
+      with: 'The alert reaches me, not you.',
+    },
+    {
+      without: 'A contact form breaks quietly and enquiries stop arriving.',
+      with: 'Forms tested every month, so you know they land.',
+    },
+    {
+      without: 'A domain or certificate expires with no warning.',
+      with: 'Renewals flagged a month ahead.',
+    },
+    {
+      without: 'Bigger work waits for budget and a free slot.',
+      with: 'One bigger thing every month on Premium, already paid for.',
+    },
+  ],
+}

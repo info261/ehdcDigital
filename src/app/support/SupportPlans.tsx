@@ -5,7 +5,8 @@ import Container from '@/components/ui/Container'
 import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations'
 import NotionBoard from './NotionBoard'
 import PlanCards from './PlanCards'
-import { meta, biggerNote, howItWorks, boardNote, terms, exclusions } from './content'
+import WhyAPlan from './WhyAPlan'
+import { meta, biggerNote, howItWorks, boardNote, terms, exclusions, comparison } from './content'
 
 const reveal = {
   initial: 'initial' as const,
@@ -59,8 +60,17 @@ export default function SupportPlans() {
           </motion.div>
         </header>
 
-        {/* ---------- plans ---------- */}
+        {/* ---------- why a plan (the problem, before the price) ---------- */}
         <section className="pt-16 md:pt-20">
+          <SectionHead eyebrow={comparison.eyebrow} title={comparison.title} />
+          <WhyAPlan />
+          <p className="mt-5 text-[0.9rem] leading-relaxed text-muted text-pretty">
+            {comparison.lede}
+          </p>
+        </section>
+
+        {/* ---------- plans ---------- */}
+        <section className="pt-20 md:pt-24">
           <PlanCards />
 
           <motion.p
