@@ -5,7 +5,7 @@ Disallow: /stats
 Disallow: /api/
 
 # Sitemaps
-Sitemap: https://ehdcdigital.com/sitemap.xml
+Sitemap: https://www.ehdcdigital.com/sitemap.xml
 
 # AI search and assistants: allowed, so the site can be cited in AI answers
 User-agent: OAI-SearchBot

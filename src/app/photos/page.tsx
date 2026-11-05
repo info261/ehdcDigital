@@ -11,7 +11,7 @@ export const revalidate = 60
 export const metadata: Metadata = {
   title: 'Photos',
   description: 'A personal photo journal by Erik Hudec.',
-  alternates: { canonical: 'https://ehdcdigital.com/photos' },
+  alternates: { canonical: 'https://www.ehdcdigital.com/photos' },
 }
 
 export default async function PhotosPage() {

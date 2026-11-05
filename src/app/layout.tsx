@@ -13,7 +13,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ehdcdigital.com'),
+  metadataBase: new URL('https://www.ehdcdigital.com'),
   icons: {
     icon: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg',
     apple: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   description: 'High-converting websites for startups, agencies and founders. Erik Hudec, a Webflow Certified Partner, designs and builds sites that turn visitors into customers.',
   keywords: ['web design', 'webflow developer', 'webflow certified partner', 'website design', 'branding', 'UI/UX design', 'startup website', 'agency website', 'high-converting websites', 'automations'],
-  authors: [{ name: 'Erik Hudec', url: 'https://ehdcdigital.com' }],
+  authors: [{ name: 'Erik Hudec', url: 'https://www.ehdcdigital.com' }],
   creator: 'Erik Hudec',
   publisher: 'ehdcDigital',
   robots: {
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://ehdcdigital.com',
+    url: 'https://www.ehdcdigital.com',
     siteName: 'ehdcDigital',
     title: 'ehdcDigital | High-Converting Websites for Startups & Agencies',
     description: 'High-converting websites for startups, agencies and founders. Webflow Certified Partner designing and building sites that turn visitors into customers.',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     creator: '@HudecErik',
   },
   alternates: {
-    canonical: 'https://ehdcdigital.com',
+    canonical: 'https://www.ehdcdigital.com',
   },
   category: 'technology',
 }
@@ -64,17 +64,17 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'WebSite',
-      '@id': 'https://ehdcdigital.com/#website',
-      url: 'https://ehdcdigital.com',
+      '@id': 'https://www.ehdcdigital.com/#website',
+      url: 'https://www.ehdcdigital.com',
       name: 'ehdcDigital',
       description: 'High-converting websites for startups, agencies, and founders',
-      publisher: { '@id': 'https://ehdcdigital.com/#person' },
+      publisher: { '@id': 'https://www.ehdcdigital.com/#person' },
     },
     {
       '@type': 'Person',
-      '@id': 'https://ehdcdigital.com/#person',
+      '@id': 'https://www.ehdcdigital.com/#person',
       name: 'Erik Hudec',
-      url: 'https://ehdcdigital.com',
+      url: 'https://www.ehdcdigital.com',
       image: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg',
       sameAs: [
         'https://www.linkedin.com/in/erik-hudec-091b0612b/',
@@ -85,16 +85,16 @@ const jsonLd = {
       jobTitle: 'Web Designer & Webflow Developer',
       homeLocation: { '@type': 'Place', name: 'Prague, Czech Republic' },
       knowsAbout: ['Web design', 'Webflow', 'UI/UX design', 'Branding', 'Conversion rate optimization', 'Web accessibility', 'SEO', 'Automations'],
-      worksFor: { '@id': 'https://ehdcdigital.com/#organization' },
+      worksFor: { '@id': 'https://www.ehdcdigital.com/#organization' },
     },
     {
       '@type': 'ProfessionalService',
-      '@id': 'https://ehdcdigital.com/#organization',
+      '@id': 'https://www.ehdcdigital.com/#organization',
       name: 'ehdcDigital',
-      url: 'https://ehdcdigital.com',
+      url: 'https://www.ehdcdigital.com',
       logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg',
       description: 'I design and build high-converting websites that turn visitors into customers.',
-      founder: { '@id': 'https://ehdcdigital.com/#person' },
+      founder: { '@id': 'https://www.ehdcdigital.com/#person' },
       email: 'info@ehdcdigital.com',
       address: { '@type': 'PostalAddress', addressLocality: 'Prague', addressCountry: 'CZ' },
       areaServed: 'Worldwide',
@@ -146,7 +146,7 @@ const jsonLd = {
     },
     {
       '@type': 'FAQPage',
-      '@id': 'https://ehdcdigital.com/#faq',
+      '@id': 'https://www.ehdcdigital.com/#faq',
       mainEntity: faqs.map((faq) => ({
         '@type': 'Question',
         name: faq.question,
