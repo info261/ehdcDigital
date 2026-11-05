@@ -1,31 +1,78 @@
 # ehdcDigital
 
-> High-converting websites for startups, agencies, and founders.
+> High-converting websites for startups, agencies and founders. Web design, Webflow development, branding and automations by Erik Hudec, a Prague-based Webflow Certified Partner.
 
-ehdcDigital is a web design and development studio run by Erik Hudec, a Webflow Certified Partner. We specialize in creating websites that convert visitors into customers.
+ehdcDigital is the web design and development studio of Erik Hudec. Erik has spent the last five years building Webflow sites and automations for clients worldwide, with a focus on conversion, accessibility, UX and SEO.
 
 ## Services
 
 - **Web Design**: Strategic UI/UX that converts visitors into paying customers.
-- **Webflow Development**: Fast, scalable sites you can edit yourself—no code needed.
+- **Webflow Development**: Fast, scalable sites you can edit yourself, no code needed.
 - **Branding**: Memorable identity that builds trust and stands out.
 - **Automations**: Smart workflows that save hours and eliminate busywork.
 
 ## Contact
 
+- Book a free intro call: https://cal.com/ehdcdigital/needawebsite
 - Email: info@ehdcdigital.com
-- Book a call: https://cal.com/ehdcdigital/client-call
+- Website: https://ehdcdigital.com
 
 ## About Erik Hudec
 
-Erik Hudec is the founder of ehdcDigital and a Webflow Certified Partner. He designs and builds high-converting websites for startups, agencies, and founders worldwide.
+- Founder of ehdcDigital, Webflow Certified Partner
+- Based in Prague, Czech Republic (originally from Banská Bystrica, Slovakia); works with clients worldwide
+- LinkedIn: https://www.linkedin.com/in/erik-hudec-091b0612b/
+- X: https://x.com/HudecErik
+- Contra: https://contra.com/erik_hudec_tfzihkdd
+- Newsletter for freelancers: https://eriks-newsletter-70c132.beehiiv.com/
+
+## Selected work
+
+- **Webyst**: agency website redesign
+- **Birdline**: SaaS landing page
+- **Work For All**: recruitment platform redesign
+- **Tesla Energo Services**: technical inspection company website with online booking
+- **Enstra**: energy infrastructure website
+- **TDM 2000 International**: youth NGO platform
 
 ## Testimonials
 
-- "We've done multiple projects together and Erik always nails it. Great communication, fast turnaround, and the quality is consistently solid." — David Stolarik, Webyst
-- "We've been working with Erik for 4 months now, and he is truly a professional. The phrase 'it can't be done' doesn't exist for him." — Filip Langštein, Birdline
-- "Creativity, and high-level consulting. A young, extremely talented guy built our website exceptionally well and really quickly." — Daniel Celiga, detaility
+- "We've done multiple projects together and Erik always nails it. Great communication, fast turnaround, and the quality is consistently solid." (David Stolarik, Webyst)
+- "We've been working with Erik for 4 months now, and he is truly a professional. The phrase 'it can't be done' doesn't exist for him." (Filip Langštein, Birdline)
+- "Creativity, and high-level consulting. A young, extremely talented guy built our website exceptionally well and really quickly." (Daniel Celiga, detaility)
+- "I've worked with Erik on multiple Webflow projects seamlessly. Great communication, clean work, always delivers beyond expectations." (Vlad Marchyuk, Work For All)
+- "A highly professional approach with skills beyond our expectations. Fresh ideas helped our company present itself positively." (Adam Slobodník, JustADS)
+- "Erik helped out with a small section of our site, and did an awesome job. Quick, clean work and super easy to collaborate with." (Jozef Šimko, Readmio)
+- "A highly professional approach with skills beyond our expectations. Erik perfectly took on the project assignment, bringing in fresh ideas." (Roman Kuklica, Work For All)
+- "Working with Erik has been a breeze. Great communication, deep understanding of our needs, and a holistic approach that led to smart solutions." (Filip Papranec, Digitaliko)
+- "I recently had the pleasure of working with Erik on a web development project, and I can confidently say that he is an exceptional developer." (Omar Houchaimi, Arachnadia)
 
-## Trusted By
+## Trusted by
 
-Webyst, Birdline, Readmio, Autovea, JustADS, detaility
+Webyst, Birdline, Readmio, Autovea, JustADS, Donivo, Arachnadia, detaility, Work For All
+
+## FAQ
+
+### What does ehdcDigital do?
+
+ehdcDigital designs and builds high-converting websites for startups, agencies and founders. Services cover web design (UI/UX), Webflow development, branding and automations.
+
+### Who is behind ehdcDigital?
+
+Erik Hudec, a Prague-based web designer and Webflow Certified Partner. He has spent the last five years building Webflow sites and automations for clients worldwide, with a focus on accessibility, UX and SEO.
+
+### Why build my website in Webflow?
+
+Webflow sites are fast, scalable and easy to edit without code. As a Webflow Certified Partner, Erik builds sites your team can update on its own, with a CMS for pages like blogs, case studies or job listings.
+
+### Can I update the website myself after launch?
+
+Yes. Every site is handed over so you can edit text, images and CMS content yourself, no developer needed. Ongoing support plans are available if you would rather have changes handled for you.
+
+### Do you work with clients outside Slovakia and the Czech Republic?
+
+Yes. ehdcDigital works with clients worldwide, remotely, in English, Slovak and Czech.
+
+### How do I start a project?
+
+Book a free intro call at cal.com/ehdcdigital/needawebsite or email info@ehdcdigital.com. We talk through your goals, then you get a proposal with scope, timeline and price.

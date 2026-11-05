@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import LenisProvider from '@/components/LenisProvider'
+import Analytics from '@/components/Analytics'
+import { BOOKING_URL, faqs } from '@/data/faq'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     default: 'ehdcDigital | High-Converting Websites for Startups & Agencies',
     template: '%s | ehdcDigital',
   },
-  description: 'I design and build high-converting websites that turn visitors into customers. Webflow Certified Partner specializing in web design, development, branding, and automations for startups, agencies, and founders.',
+  description: 'High-converting websites for startups, agencies and founders. Erik Hudec, a Webflow Certified Partner, designs and builds sites that turn visitors into customers.',
   keywords: ['web design', 'webflow developer', 'webflow certified partner', 'website design', 'branding', 'UI/UX design', 'startup website', 'agency website', 'high-converting websites', 'automations'],
   authors: [{ name: 'Erik Hudec', url: 'https://ehdcdigital.com' }],
   creator: 'Erik Hudec',
@@ -42,22 +44,13 @@ export const metadata: Metadata = {
     url: 'https://ehdcdigital.com',
     siteName: 'ehdcDigital',
     title: 'ehdcDigital | High-Converting Websites for Startups & Agencies',
-    description: 'I design and build high-converting websites that turn visitors into customers. Webflow Certified Partner specializing in web design, development, branding, and automations.',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'ehdcDigital - High-Converting Websites',
-      },
-    ],
+    description: 'High-converting websites for startups, agencies and founders. Webflow Certified Partner designing and building sites that turn visitors into customers.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'ehdcDigital | High-Converting Websites for Startups & Agencies',
-    description: 'I design and build high-converting websites that turn visitors into customers. Webflow Certified Partner.',
-    images: ['/og-image.png'],
-    creator: '@ehdcdigital',
+    description: 'High-converting websites for startups, agencies and founders. Webflow Certified Partner designing and building sites that turn visitors into customers.',
+    creator: '@HudecErik',
   },
   alternates: {
     canonical: 'https://ehdcdigital.com',
@@ -84,10 +77,14 @@ const jsonLd = {
       url: 'https://ehdcdigital.com',
       image: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/680f55fbb602a243bb1fc091_6720fed9b8f304e5b57a2480_IMG_6426%203%20(1).jpeg',
       sameAs: [
+        'https://www.linkedin.com/in/erik-hudec-091b0612b/',
+        'https://x.com/HudecErik',
         'https://contra.com/erik_hudec_tfzihkdd',
-        'https://cal.com/ehdcdigital',
+        'https://eriks-newsletter-70c132.beehiiv.com/',
       ],
       jobTitle: 'Web Designer & Webflow Developer',
+      homeLocation: { '@type': 'Place', name: 'Prague, Czech Republic' },
+      knowsAbout: ['Web design', 'Webflow', 'UI/UX design', 'Branding', 'Conversion rate optimization', 'Web accessibility', 'SEO', 'Automations'],
       worksFor: { '@id': 'https://ehdcdigital.com/#organization' },
     },
     {
@@ -99,7 +96,14 @@ const jsonLd = {
       description: 'I design and build high-converting websites that turn visitors into customers.',
       founder: { '@id': 'https://ehdcdigital.com/#person' },
       email: 'info@ehdcdigital.com',
+      address: { '@type': 'PostalAddress', addressLocality: 'Prague', addressCountry: 'CZ' },
       areaServed: 'Worldwide',
+      sameAs: ['https://www.linkedin.com/in/erik-hudec-091b0612b/', 'https://x.com/HudecErik'],
+      potentialAction: {
+        '@type': 'ReserveAction',
+        name: 'Book an intro call',
+        target: BOOKING_URL,
+      },
       serviceType: ['Web Design', 'Webflow Development', 'Branding', 'Automations'],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
@@ -139,32 +143,15 @@ const jsonLd = {
           },
         ],
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '5',
-        reviewCount: '5',
-      },
     },
     {
       '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'What services does ehdcDigital offer?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'ehdcDigital offers web design, Webflow development, branding, and automation services for startups, agencies, and founders.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Is ehdcDigital a Webflow Certified Partner?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Yes, ehdcDigital is an official Webflow Certified Partner, ensuring high-quality Webflow development and best practices.',
-          },
-        },
-      ],
+      '@id': 'https://ehdcdigital.com/#faq',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
     },
   ],
 }
@@ -212,6 +199,7 @@ export default function RootLayout({
         <LenisProvider>
           {children}
         </LenisProvider>
+        <Analytics />
       </body>
     </html>
   )

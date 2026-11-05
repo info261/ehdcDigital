@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { projects, caseStudies } from '@/data/content'
+import { faqs } from '@/data/faq'
 import { Logo } from '@/components/Logo'
 import {
   Palette,
@@ -1230,6 +1231,37 @@ export default function SplitLayout() {
                 <CopyEmailButton />
               </motion.div>
 
+              {/* Partner Logos */}
+              <motion.section
+                variants={staggerItem}
+                className="mt-8"
+                aria-label="Trusted clients"
+              >
+                <h2 className="text-xs font-medium tracking-[0.15em] text-muted uppercase mb-4">
+                  Trusted by
+                </h2>
+                <ul className="flex flex-wrap items-center gap-4" role="list">
+                  {[
+                    { name: 'Webyst', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67260b22b2f66d9909c9d445_webyst.svg' },
+                    { name: 'Birdline', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67260c1857a3cb20b408ff6e_birdline.svg' },
+                    { name: 'Readmio', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67260c8faca8c9d3704b1789_readmio.png' },
+                    { name: 'Autovea', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67260de538fb9808659d1b47_Black%20logo%20-%20no%20background%20(1).svg' },
+                    { name: 'JustADS', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67228e7d0da8c33e7925b157_JustADS.svg', scale: 1.5 },
+                    { name: 'Donivo', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/6726496a6ebda18a3e5a3936_donivostk.svg' },
+                    { name: 'Arachnadia', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67264a0f38fb980865c89b34_Logo_Black.svg' },
+                  ].map((company) => (
+                    <li key={company.name} className="w-16 h-6 flex items-center justify-center">
+                      <img
+                        src={company.logo}
+                        alt={company.name}
+                        className="max-w-full max-h-full object-contain opacity-40 grayscale hover:opacity-60 transition-opacity duration-200"
+                        style={company.scale ? { transform: `scale(${company.scale})` } : undefined}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </motion.section>
+
               {/* Services list */}
               <motion.nav variants={staggerContainer} className="mt-8" aria-label="Services offered">
                 <motion.h2
@@ -1277,40 +1309,37 @@ export default function SplitLayout() {
                 </h2>
                 <TestimonialSlider />
               </motion.section>
+
+              {/* FAQ — the same entries feed the FAQPage JSON-LD in app/layout.tsx */}
+              <motion.section
+                variants={fadeInBlur}
+                className="mt-10 pt-8 border-t border-border/50"
+                aria-labelledby="faq-heading"
+              >
+                <h2 id="faq-heading" className="text-xs font-medium tracking-[0.15em] text-muted uppercase mb-3">
+                  FAQ
+                </h2>
+                <ul className="divide-y divide-border/60" role="list">
+                  {faqs.map((faq) => (
+                    <li key={faq.question}>
+                      <details className="group py-3">
+                        <summary className="flex cursor-pointer list-none items-start justify-between gap-3 text-sm font-medium text-foreground [&::-webkit-details-marker]:hidden">
+                          <h3 className="text-sm font-medium">{faq.question}</h3>
+                          <span
+                            className="mt-0.5 text-muted transition-transform duration-200 group-open:rotate-45"
+                            aria-hidden="true"
+                          >
+                            +
+                          </span>
+                        </summary>
+                        <p className="mt-2 text-xs text-muted leading-relaxed">{faq.answer}</p>
+                      </details>
+                    </li>
+                  ))}
+                </ul>
+              </motion.section>
             </motion.div>
 
-            {/* Partner Logos */}
-            <motion.section
-              initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 0.7, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mt-10 pt-8 lg:mt-auto"
-              aria-label="Trusted clients"
-            >
-              <h2 className="text-xs font-medium tracking-[0.15em] text-muted uppercase mb-4">
-                Trusted by
-              </h2>
-              <ul className="flex flex-wrap items-center gap-4" role="list">
-                {[
-                  { name: 'Webyst', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67260b22b2f66d9909c9d445_webyst.svg' },
-                  { name: 'Birdline', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67260c1857a3cb20b408ff6e_birdline.svg' },
-                  { name: 'Readmio', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67260c8faca8c9d3704b1789_readmio.png' },
-                  { name: 'Autovea', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67260de538fb9808659d1b47_Black%20logo%20-%20no%20background%20(1).svg' },
-                  { name: 'JustADS', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67228e7d0da8c33e7925b157_JustADS.svg', scale: 1.5 },
-                  { name: 'Donivo', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/6726496a6ebda18a3e5a3936_donivostk.svg' },
-                  { name: 'Arachnadia', logo: 'https://cdn.prod.website-files.com/671feb5fa37d8eda3aaf78c7/67264a0f38fb980865c89b34_Logo_Black.svg' },
-                ].map((company) => (
-                  <li key={company.name} className="w-16 h-6 flex items-center justify-center">
-                    <img
-                      src={company.logo}
-                      alt={company.name}
-                      className="max-w-full max-h-full object-contain opacity-40 grayscale hover:opacity-60 transition-opacity duration-200"
-                      style={company.scale ? { transform: `scale(${company.scale})` } : undefined}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </motion.section>
 
           </div>
         </aside>
@@ -1382,7 +1411,13 @@ export default function SplitLayout() {
                     ) : (
                       <img
                         src={project.image}
-                        alt={project.title}
+                        alt={
+                          /^Project \d+$/.test(project.title)
+                            ? 'Website design by Erik Hudec, ehdcDigital'
+                            : `${project.title} website, designed and built by ehdcDigital`
+                        }
+                        loading={index < 2 ? 'eager' : 'lazy'}
+                        decoding="async"
                         className="absolute inset-0 w-full h-full object-cover"
                       />
                     )}
