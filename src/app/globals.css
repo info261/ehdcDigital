@@ -211,3 +211,20 @@ h1, h2, h3, h4, h5, h6 {
   stroke-dashoffset: 0;
 }
 
+
+/* Photo lightbox — declarative so the entrance replays on remount (stepping
+   between photos) without depending on requestAnimationFrame or React state. */
+@keyframes photo-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes photo-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes photo-zoom-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
